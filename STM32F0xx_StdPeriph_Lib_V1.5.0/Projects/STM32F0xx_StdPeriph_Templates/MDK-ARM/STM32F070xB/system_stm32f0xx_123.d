@@ -1,0 +1,14 @@
+stm32f070xb\system_stm32f0xx_123.o: LOAD\User\system_stm32f0xx_123.c
+stm32f070xb\system_stm32f0xx_123.o: LOAD\User\stm32f0xx.h
+stm32f070xb\system_stm32f0xx_123.o: ..\..\..\Libraries\CMSIS\Include\core_cm0.h
+stm32f070xb\system_stm32f0xx_123.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f070xb\system_stm32f0xx_123.o: ..\..\..\Libraries\CMSIS\Include\core_cmInstr.h
+stm32f070xb\system_stm32f0xx_123.o: ..\..\..\Libraries\CMSIS\Include\core_cmFunc.h
+stm32f070xb\system_stm32f0xx_123.o: LOAD\User\system_stm32f0xx.h
+stm32f070xb\system_stm32f0xx_123.o: LOAD\User\stm32f0xx_conf.h
+stm32f070xb\system_stm32f0xx_123.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_adc.h
+stm32f070xb\system_stm32f0xx_123.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
+stm32f070xb\system_stm32f0xx_123.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_gpio.h
+stm32f070xb\system_stm32f0xx_123.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_rcc.h
+stm32f070xb\system_stm32f0xx_123.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_usart.h
+stm32f070xb\system_stm32f0xx_123.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h

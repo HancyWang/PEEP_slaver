@@ -283,29 +283,29 @@ void SystemCoreClockUpdate (void)
   */
 static void SetSysClock(void)
 {
-  __IO uint32_t StartUpCounter = 0, HSEStatus = 0;
+  __IO uint32_t StartUpCounter = 0, HSIStatus = 0;
   
   /* SYSCLK, HCLK, PCLK configuration ----------------------------------------*/
   /* Enable HSE */    
-  RCC->CR |= ((uint32_t)RCC_CR_HSEON);
+  RCC->CR |= ((uint32_t)RCC_CR_HSION);
  
   /* Wait till HSE is ready and if Time out is reached exit */
-  do
-  {
-    HSEStatus = RCC->CR & RCC_CR_HSERDY;
-    StartUpCounter++;  
-  } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
+//  do
+//  {
+//    HSEStatus = RCC->CR & RCC_CR_HSERDY;
+//    StartUpCounter++;  
+//  } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
-  if ((RCC->CR & RCC_CR_HSERDY) != RESET)
+  if ((RCC->CR & RCC_CR_HSIRDY) != RESET)
   {
-    HSEStatus = (uint32_t)0x01;
+    HSIStatus = (uint32_t)0x08;
   }
   else
   {
-    HSEStatus = (uint32_t)0x00;
+    HSIStatus = (uint32_t)0x01;
   }  
 
-  if (HSEStatus == (uint32_t)0x01)
+  if (HSIStatus == (uint32_t)0x08)
   {
     /* Enable Prefetch Buffer and set Flash Latency */
     FLASH->ACR = FLASH_ACR_PRFTBE | FLASH_ACR_LATENCY;
@@ -318,7 +318,7 @@ static void SetSysClock(void)
 
     /* PLL configuration = HSE * 6 = 48 MHz */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL));
-    RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_PREDIV1 | RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLMULL6);
+    RCC->CFGR |= (uint32_t)(  RCC_CFGR_PLLXTPRE_PREDIV1_Div2 | RCC_CFGR_PLLMULL12);//RCC_CFGR_PLLSRC_PREDIV1
             
     /* Enable PLL */
     RCC->CR |= RCC_CR_PLLON;
