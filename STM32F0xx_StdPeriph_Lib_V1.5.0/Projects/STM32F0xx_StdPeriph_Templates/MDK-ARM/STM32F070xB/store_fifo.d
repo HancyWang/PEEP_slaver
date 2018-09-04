@@ -33,3 +33,5 @@ stm32f070xb\store_fifo.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm3
 stm32f070xb\store_fifo.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_wwdg.h
 stm32f070xb\store_fifo.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h
 stm32f070xb\store_fifo.o: .\LOAD\HARDWARE\hardware.h
+stm32f070xb\store_fifo.o: .\LOAD\SYSTEM\serial_port.h
+stm32f070xb\store_fifo.o: .\LOAD\User\device_type.h

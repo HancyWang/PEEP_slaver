@@ -50,6 +50,20 @@
 #define UART_WIFI_RX_AF_PIN_SOURCE GPIO_PinSource11
 #define UART_WIFI_TX_AF_PIN_SOURCE GPIO_Pinsource10
 
+
+//´®¿ÚÀ¶ÑÀµÄ´®¿ÚÅäÖÃ  UART1 PB10-TX  PB11-RX
+#define UART_BLUETOOTH            						USART1
+#define UART_BLUETOOTH_CLKSRC      						RCC_APB2Periph_USART1
+
+#define UART_BLUETOOTH_IO_PORT			          GPIOA
+#define	UART_BLUETOOTH_IO_CLKSRC		          RCC_AHBPeriph_GPIOA   
+#define UART_BLUETOOTH_RX_PIN									GPIO_Pin_10
+#define UART_BLUETOOTH_TX_PIN									GPIO_Pin_9
+#define UART_BLUETOOTH_RX_AF_PIN_SOURCE				GPIO_PinSource10
+#define UART_BLUETOOTH_TX_AF_PIN_SOURCE 			GPIO_PinSource9
+
+
+
 #define UART_BAUDRATE   115200 
 
 #define DMA_CLKSRC RCC_AHBPeriph_DMA1
@@ -72,4 +86,10 @@
 void UARTInit(uint8_t* p_rec_buf, uint32_t rec_num);
 void UartSendNBytes (uint8_t *p_buf, uint32_t num);
 int32_t GetUartReceiverResidualCnt(void);
+void Init_UART_WIFI(uint32_t BaudRate);
+void Init_UART_BLUETOOTH(uint32_t BaudRate);
+void USART_BLUETOOTH_SendBuf(uint8_t *pBuf, uint32_t u32Len);
+uint8_t USART_BLUETOOTH_ReciverBuf(void);
+void USART_WIFI_SendBuf(uint8_t *pBuf, uint32_t u32Len);
+uint8_t USART_WIFI_ReciverBuf(void);
 #endif

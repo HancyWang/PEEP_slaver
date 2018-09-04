@@ -32,6 +32,8 @@ stm32f070xb\hardware.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f
 stm32f070xb\hardware.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_usart.h
 stm32f070xb\hardware.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_wwdg.h
 stm32f070xb\hardware.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h
+stm32f070xb\hardware.o: .\LOAD\SYSTEM\serial_port.h
+stm32f070xb\hardware.o: .\LOAD\User\device_type.h
 stm32f070xb\hardware.o: .\LOAD\SYSTEM\delay.h
 stm32f070xb\hardware.o: .\LOAD\OS\os_cfg.h
 stm32f070xb\hardware.o: .\LOAD\OS\os_core.h

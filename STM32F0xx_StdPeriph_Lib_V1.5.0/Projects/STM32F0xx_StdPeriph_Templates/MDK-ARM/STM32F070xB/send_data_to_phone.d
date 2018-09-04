@@ -34,3 +34,6 @@ stm32f070xb\send_data_to_phone.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\
 stm32f070xb\send_data_to_phone.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h
 stm32f070xb\send_data_to_phone.o: LOAD\APP\app.h
 stm32f070xb\send_data_to_phone.o: .\LOAD\OS\os_cfg.h
+stm32f070xb\send_data_to_phone.o: .\LOAD\SYSTEM\serial_port.h
+stm32f070xb\send_data_to_phone.o: .\LOAD\User\device_type.h
+stm32f070xb\send_data_to_phone.o: LOAD\APP\key_power_on_task.h

@@ -35,14 +35,14 @@ stm32f070xb\key_power_on_task.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\i
 stm32f070xb\key_power_on_task.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h
 stm32f070xb\key_power_on_task.o: .\LOAD\SYSTEM\fifo\datatype.h
 stm32f070xb\key_power_on_task.o: .\LOAD\HARDWARE\hardware.h
+stm32f070xb\key_power_on_task.o: .\LOAD\SYSTEM\serial_port.h
+stm32f070xb\key_power_on_task.o: .\LOAD\User\device_type.h
 stm32f070xb\key_power_on_task.o: .\LOAD\SYSTEM\fifo\fifo.h
 stm32f070xb\key_power_on_task.o: LOAD\APP\key_power_on_task.h
 stm32f070xb\key_power_on_task.o: .\LOAD\MODULE\protocol_module.h
 stm32f070xb\key_power_on_task.o: LOAD\APP\i2c.h
 stm32f070xb\key_power_on_task.o: LOAD\APP\common.h
 stm32f070xb\key_power_on_task.o: .\LOAD\HARDWARE\Motor_pwm.h
-stm32f070xb\key_power_on_task.o: .\LOAD\SYSTEM\serial_port.h
-stm32f070xb\key_power_on_task.o: .\LOAD\User\device_type.h
 stm32f070xb\key_power_on_task.o: .\LOAD\SYSTEM\cmd\CMD_receive.h
 stm32f070xb\key_power_on_task.o: .\LOAD\SYSTEM\delay.h
 stm32f070xb\key_power_on_task.o: LOAD\APP\comm_task.h

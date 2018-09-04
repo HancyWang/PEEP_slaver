@@ -29,6 +29,7 @@
 #include "stm32f0xx_usart.h"
 //#include "store_fifo.h"
 #include "send_data_to_phone.h"
+#include "i2c.h"
 /**********************************
 *宏定义
 ***********************************/
@@ -69,6 +70,7 @@ void init_task(void)
 	//初始化硬件
 	init_hardware();	
 	//Motor_PWM_Init();
+
 	
 //#ifdef _DEBUG
 //	Calibrate_pressure_sensor(&zero_point_of_pressure_sensor);
@@ -83,10 +85,10 @@ void init_task(void)
 //	os_create_task(TaskDataSend, OS_TRUE, SEND_TASK_ID);
 //	os_create_task(CMD_ProcessTask, OS_TRUE, RECEIVE_TASK_ID);
 
-	//os_create_task(test, OS_TRUE, TASK_TEST_ID);
-
-	os_create_task(key_power_on_task, OS_TRUE, KEY_LED_TASK_ID);
-	//os_create_task(send_data_to_phone_task, OS_TRUE, KEY_SEND_DATA_TO_PHONE_TASK_ID);
+	//os_create_task(test, OS_TRUE, TASK_TEST_ID);TASK_TEST_ID
+	os_create_task(test_task,OS_TRUE,TASK_TEST_ID);
+	//os_create_task(key_power_on_task, OS_TRUE, KEY_LED_TASK_ID);
+//	os_create_task(send_data_to_phone_task, OS_TRUE, KEY_SEND_DATA_TO_PHONE_TASK_ID);
 	
 	//os_create_task(get_switch_mode,OS_TRUE,TASK_GET_SWITCH_MODE);
 	//os_create_task(check_selectedMode_ouputPWM,OS_TRUE,TASK_OUTPUT_PWM);
@@ -101,8 +103,54 @@ void init_task(void)
 	os_pend_task(INIT_TASK_ID);
 }
 
-
+//测试任务，专门用来调试代码
 void test_task(void)
 {
+//	//GPIO_ResetBits(GPIOB,GPIO_Pin_3|GPIO_Pin_4);
+//	//设置PB8
+//	GPIO_InitTypeDef  GPIO_InitStructure;
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
+//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+//	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+//	//GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+//	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+//	//GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+//	GPIO_Init(GPIOB, &GPIO_InitStructure);
+//	GPIO_SetBits(GPIOB,GPIO_Pin_8);
+//	Delay_ms(10);
+	
+	//测试honeywell sensor
+	static UINT32 data,data1;
+	Init_honeywell_sensor();
+	Delay_ms(5);
+////	Honeywell_ready_for_read();
+//////		Init_ADS115();
+//		Delay_ms(10);
+	
+	Init_MS5525DSO_sensor();
+		Delay_ms(5);
+	
+	while(1)
+	{
+		Init_honeywell_sensor();
+		//while(0x60==Honeywell_ready_for_read()){}    //可以使用这个while语句，也可以使用delay_ms(5)
+		Delay_ms(5);
+		data=honeywell_readByte();
+//		Delay_ms(5);
+		
+		
+		MS5525DSO_prepare_to_read();
+		Delay_ms(8);
+		data1=MS5525DSO_readByte();
+	}	
+	
+//	uint8_t data=0x34;
+//	while(1)
+//	{
+//		USART_WIFI_SendBuf(&data,1);
+//		Delay_ms(100);
+//	}
+	
+	
 	os_delay_ms(TEST_TASK_ID, 50);
 }

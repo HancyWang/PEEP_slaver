@@ -36,7 +36,6 @@
 *******************************************************************************/
 void UARTInit(uint8_t* p_rec_buf, uint32_t rec_num)
 {
-	
 	GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;
 	DMA_InitTypeDef DMA_InitStructure;
@@ -119,7 +118,7 @@ void UARTInit(uint8_t* p_rec_buf, uint32_t rec_num)
 * 输出参数 : 无
 * 函数返回 : 无
 *******************************************************************************/
-void UART_WIFI_Init(uint32_t BaudRate)
+void Init_UART_WIFI(uint32_t BaudRate)
 {
 		USART_InitTypeDef USART_InitStruct;
     GPIO_InitTypeDef GPIO_InitStruct;
@@ -173,6 +172,78 @@ uint8_t USART_WIFI_ReciverBuf(void)
 	while(!USART_GetFlagStatus(UART_WIFI,USART_FLAG_RXNE)){};
   return USART_ReceiveData(UART_WIFI);
 }
+
+
+//发送串口蓝牙数据
+void USART_BLUETOOTH_SendBuf(uint8_t *pBuf, uint32_t u32Len)
+{
+	while(u32Len--)
+    {
+        /*判断发送缓冲区是否为空*/
+        while(!USART_GetFlagStatus(UART_BLUETOOTH,USART_FLAG_TXE));
+        USART_SendData(UART_BLUETOOTH,*pBuf++);
+    }
+}
+
+//接收串口蓝牙数据
+uint8_t USART_BLUETOOTH_ReciverBuf(void)
+{
+	//判断接收缓冲区是否为空
+	while(!USART_GetFlagStatus(UART_BLUETOOTH,USART_FLAG_RXNE)){};
+  return USART_ReceiveData(UART_BLUETOOTH);
+}
+
+
+/*******************************************************************************
+* 函数名称 : UART_BLUETOOTH_Init
+* 功能描述 : 初始化串口蓝牙
+* 输入参数 : 波特率
+* 输出参数 : 无
+* 函数返回 : 无
+*******************************************************************************/
+void Init_UART_BLUETOOTH(uint32_t BaudRate)
+{
+		USART_InitTypeDef USART_InitStruct;
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);  
+		RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA,ENABLE);
+    
+		//PA9,PA10
+    GPIO_PinAFConfig(GPIOA,UART_BLUETOOTH_RX_PIN,GPIO_AF_1);
+    GPIO_PinAFConfig(GPIOA,UART_BLUETOOTH_TX_PIN,GPIO_AF_1);  
+
+    GPIO_InitStruct.GPIO_Pin=UART_BLUETOOTH_RX_PIN|UART_BLUETOOTH_TX_PIN;
+    GPIO_InitStruct.GPIO_Mode=GPIO_Mode_AF;
+    GPIO_InitStruct.GPIO_OType=GPIO_OType_PP;
+    GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
+    GPIO_InitStruct.GPIO_PuPd=GPIO_PuPd_UP;
+    GPIO_Init(UART_BLUETOOTH_IO_PORT,&GPIO_InitStruct);
+
+    /*USART基本配置*/
+    USART_InitStruct.USART_BaudRate=UART_BAUDRATE;
+    USART_InitStruct.USART_HardwareFlowControl=USART_HardwareFlowControl_None;
+    USART_InitStruct.USART_Mode=USART_Mode_Tx|USART_Mode_Rx;
+    USART_InitStruct.USART_Parity=USART_Parity_No;
+    USART_InitStruct.USART_StopBits=USART_StopBits_1;
+    USART_InitStruct.USART_WordLength=USART_WordLength_8b;
+		USART_Init(UART_BLUETOOTH,&USART_InitStruct);
+		
+		USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);
+
+		USART_Cmd(UART_BLUETOOTH,ENABLE);
+//    /*??????*/
+//    NVIC_Config(USART1_IRQn);
+//    USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+		NVIC_InitTypeDef NVIC_InitStructure;
+		
+		/* USART1 IRQ Channel configuration */
+		NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+		NVIC_InitStructure.NVIC_IRQChannelPriority = 0x01;
+		NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+		NVIC_Init(&NVIC_InitStructure);
+}
+
 
 /*******************************************************************************
 * 函数名称 : DMA_ReWorkCfg

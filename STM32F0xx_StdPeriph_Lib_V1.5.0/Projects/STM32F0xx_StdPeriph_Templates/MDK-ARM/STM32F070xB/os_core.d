@@ -34,3 +34,5 @@ stm32f070xb\os_core.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0
 stm32f070xb\os_core.o: LOAD\OS\os_cfg.h
 stm32f070xb\os_core.o: .\LOAD\HARDWARE\hardware.h
 stm32f070xb\os_core.o: .\LOAD\SYSTEM\fifo\datatype.h
+stm32f070xb\os_core.o: .\LOAD\SYSTEM\serial_port.h
+stm32f070xb\os_core.o: .\LOAD\User\device_type.h

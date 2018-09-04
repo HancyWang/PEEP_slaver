@@ -332,7 +332,7 @@ void Init_Blue_WIFI_ONOFF()  //PC13
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
-	GPIO_SetBits(GPIOC,GPIO_Pin_13);  
+	GPIO_ResetBits(GPIOC,GPIO_Pin_13);  
 }
 
 void Init_Blue_EN()        //PB15
@@ -344,7 +344,7 @@ void Init_Blue_EN()        //PB15
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	GPIO_SetBits(GPIOB,GPIO_Pin_15);  
+	GPIO_ResetBits(GPIOB,GPIO_Pin_15);  
 }
 
 //初始化USB_ON，PA15
@@ -391,10 +391,44 @@ void Init_SENSOR_ONOFF()    //PB7
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	GPIO_SetBits(GPIOB,GPIO_Pin_7); 
+	GPIO_ResetBits(GPIOB,GPIO_Pin_7); 
 }
 
+void Init_WIFI_RST()      //PB1
+{
+	GPIO_InitTypeDef  GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_SetBits(GPIOB,GPIO_Pin_1); 
+}
 
+void Init_UART_BLUETOOTH_BRTS()  //PA8  设置高电平
+{
+	GPIO_InitTypeDef  GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_SetBits(GPIOA,GPIO_Pin_8); 
+}
+
+void Init_UART_BLUETOOTH_BCTS()  //PB14  设置低电平
+{
+	GPIO_InitTypeDef  GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+//	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+//	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+//	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	//GPIO_ResetBits(GPIOB,GPIO_Pin_14); 
+}
 
 /**************************************************************
 * 初始化硬件管脚
@@ -403,32 +437,47 @@ void init_hardware()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB , ENABLE);//
 	//delay_ms(1);
-	//初始化LED灯                            //PB12,PB9
-	Init_LED();
-	
-//	//初始化USB_OE，这里是5V0_AD
-//	Init_USB_OE();  													//PA0
+//	//初始化LED灯                            //PB12,PB9
+//	Init_LED();
 //	
-//	//初始化USB_ON
-//	Init_USB_ON();
+////	//初始化USB_OE，这里是5V0_AD
+////	Init_USB_OE();  													//PA0
+////	
+////	//初始化USB_ON
+////	Init_USB_ON();
+//	
+//	//初始化 pwr_on_off
+//	Init_PWR_ON_OFF();												//PB0
+//	
+//	//初始化WIFI_RST                         //PB1
+//	Init_WIFI_RST();
 
-	//初始化 pwr_on_off
-	Init_PWR_ON_OFF();												//PB0
+//	//初始化Bluetooth&WIFI ON/PFF
+//	Init_Blue_WIFI_ONOFF();  									//PC13  
 
-	//初始化Bluetooth&WIFI ON/PFF
-	Init_Blue_WIFI_ONOFF();  									//PC13  
-
+//	//初始化WIFI串口RX,TX                     //PB10,PB11
+//	Init_UART_WIFI(UART_BAUDRATE);
+//	
 //	//初始化BLUE_EN
 //	Init_Blue_EN();														//PB15
-
+//	
+//	//初始化蓝牙串口RX,TX                     //PA9,PA10   这个初始化有问题，一开这个就按键开不了机
+//	Init_UART_BLUETOOTH(UART_BAUDRATE);
+//	
+//	//蓝牙发送模式PA8置1，PB14置0
+//	//初始化蓝牙BRTS
+//	Init_UART_BLUETOOTH_BRTS();               //PA8
+//	//初始化蓝牙BCTS
+//	Init_UART_BLUETOOTH_BCTS();               //PB14
+//	
 //	//初始化STDBY_IO,                         //PA1
 //	Init_STDBY_IO();
 
 //	//初始化CHARGE_IO                         //PA2
 //	Init_CHARGE_IO();
 
-//	//初始化sensor_on/off 										//PB7
-//	Init_SENSOR_ONOFF();		
+	//初始化sensor_on/off 										//PB7
+	Init_SENSOR_ONOFF();		
 
 //	//初始化ADC_MP  ,honneywell传感器
 //	Init_I2C_MP();

@@ -36,6 +36,8 @@ stm32f070xb\main.o: .\LOAD\OS\os_cfg.h
 stm32f070xb\main.o: .\LOAD\OS\os_core.h
 stm32f070xb\main.o: .\LOAD\HARDWARE\hardware.h
 stm32f070xb\main.o: .\LOAD\SYSTEM\fifo\datatype.h
+stm32f070xb\main.o: .\LOAD\SYSTEM\serial_port.h
+stm32f070xb\main.o: .\LOAD\User\device_type.h
 stm32f070xb\main.o: .\LOAD\APP\app.h
 stm32f070xb\main.o: .\LOAD\APP\comm_task.h
 stm32f070xb\main.o: .\LOAD\APP\key_power_on_task.h

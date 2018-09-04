@@ -16,6 +16,7 @@
 ***********************************/
 #include "datatype.h"
 #include "stm32f0xx.h"
+#include "serial_port.h"
 /**********************************
 *∫Í∂®“Â
 ***********************************/
@@ -118,7 +119,7 @@ void Init_ADC1(void);
 
 //I2C
 //void Init_ADS115(void);
-void Init_I2C_MP(void);
-void Honeywell_ready_for_read(void);
+//void Init_I2C_MP(void);
+//void Honeywell_ready_for_read(void);
 void Calibrate_pressure_sensor(int16_t* p_zeroPoint);
 #endif

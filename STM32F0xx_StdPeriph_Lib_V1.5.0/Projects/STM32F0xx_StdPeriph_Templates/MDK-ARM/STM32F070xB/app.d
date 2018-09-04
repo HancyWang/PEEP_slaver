@@ -44,3 +44,5 @@ stm32f070xb\app.o: .\LOAD\SYSTEM\fifo\fifo.h
 stm32f070xb\app.o: .\LOAD\MODULE\protocol_module.h
 stm32f070xb\app.o: LOAD\APP\key_power_on_task.h
 stm32f070xb\app.o: LOAD\APP\send_data_to_phone.h
+stm32f070xb\app.o: LOAD\APP\i2c.h
+stm32f070xb\app.o: LOAD\APP\common.h

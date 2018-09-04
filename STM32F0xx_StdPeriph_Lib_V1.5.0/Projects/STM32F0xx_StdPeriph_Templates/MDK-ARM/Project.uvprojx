@@ -1052,6 +1052,11 @@
               <FileType>1</FileType>
               <FilePath>.\LOAD\APP\key_power_on_task.c</FilePath>
             </File>
+            <File>
+              <FileName>send_data_to_phone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LOAD\APP\send_data_to_phone.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2270,6 +2275,11 @@
               <FileType>1</FileType>
               <FilePath>.\LOAD\APP\key_power_on_task.c</FilePath>
             </File>
+            <File>
+              <FileName>send_data_to_phone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LOAD\APP\send_data_to_phone.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3237,6 +3247,11 @@
               <FileName>key_power_on_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\LOAD\APP\key_power_on_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>send_data_to_phone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LOAD\APP\send_data_to_phone.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4456,6 +4471,11 @@
               <FileType>1</FileType>
               <FilePath>.\LOAD\APP\key_power_on_task.c</FilePath>
             </File>
+            <File>
+              <FileName>send_data_to_phone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LOAD\APP\send_data_to_phone.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5423,6 +5443,11 @@
               <FileName>key_power_on_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\LOAD\APP\key_power_on_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>send_data_to_phone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LOAD\APP\send_data_to_phone.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -6392,6 +6417,11 @@
               <FileType>1</FileType>
               <FilePath>.\LOAD\APP\key_power_on_task.c</FilePath>
             </File>
+            <File>
+              <FileName>send_data_to_phone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LOAD\APP\send_data_to_phone.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -7360,6 +7390,11 @@
               <FileType>1</FileType>
               <FilePath>.\LOAD\APP\key_power_on_task.c</FilePath>
             </File>
+            <File>
+              <FileName>send_data_to_phone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LOAD\APP\send_data_to_phone.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -8327,6 +8362,11 @@
               <FileName>key_power_on_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\LOAD\APP\key_power_on_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>send_data_to_phone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LOAD\APP\send_data_to_phone.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -9298,6 +9338,11 @@
               <FileName>key_power_on_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\LOAD\APP\key_power_on_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>send_data_to_phone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LOAD\APP\send_data_to_phone.c</FilePath>
             </File>
           </Files>
         </Group>

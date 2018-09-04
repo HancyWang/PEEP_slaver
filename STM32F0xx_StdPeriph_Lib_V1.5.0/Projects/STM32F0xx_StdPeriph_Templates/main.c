@@ -148,10 +148,12 @@ int main(void)
 	//Init_iWtdg(4,1250);  //4*2^4=64分频，1250(大概是1250*1.6ms=2s)
   delay_init();
 	os_init();
-	//进入stop模式
-	EnterStopMode();
-	//唤醒之后先初始化系统
-	init_system_afterWakeUp();
+	
+//	//进入stop模式
+//	EnterStopMode();
+//	//唤醒之后先初始化系统
+//	init_system_afterWakeUp();
+	
 	os_create_task(init_task, OS_TRUE, INIT_TASK_ID);
 	os_start();
 }
