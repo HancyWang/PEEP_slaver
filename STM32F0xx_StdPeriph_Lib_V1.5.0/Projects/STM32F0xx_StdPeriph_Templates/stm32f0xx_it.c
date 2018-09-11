@@ -138,12 +138,12 @@ void TIM16_IRQHandler(void)
 }
 
 
-//void USART1_IRQHandler(void)
-//{
-//	if((USART1->ISR&USART_FLAG_RXNE)==USART_FLAG_RXNE)
-//	{
-//		//USART1_SendByte((uint8_t)(USART1->RDR));
-//	}
-//}
+void USART1_IRQHandler(void)
+{
+	if((USART1->ISR&USART_FLAG_RXNE)==USART_FLAG_RXNE)
+	{
+		//USART_SendByte((uint8_t)(USART1->RDR));
+	}
+}
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

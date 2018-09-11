@@ -35,6 +35,22 @@
 #define MS5525DSO_SDA_H          		      MS5525DSO_IO_PORT->BSRR = MS5525DSO_I2C_SDA
 #define MS5525DSO_SDA_READ                (MS5525DSO_IO_PORT->IDR &  MS5525DSO_I2C_SDA) >> MS5525DSO_OFFSET
 
+typedef enum 
+{
+	C1,
+	C2,
+	C3,
+	C4,
+	C5,
+	C6
+}PROM_CX;
+
+typedef enum
+{
+	D1,
+	D2
+}DX;
+
 extern void I2C_uConfiguration(void);
 /*
 extern void SENSOR_IIC_uWriteByte(INT8U slaveaddr,INT8U regaddr,INT8U dat);
@@ -46,9 +62,17 @@ extern void SENSOR_IIC_uMultipleRead(INT8U slaveaddr,INT8U regaddr,INT8U len,INT
 //extern void AT24xx_uWriteByte(INT8U slaveaddr,INT16U writeaddr,INT8U data);
 //extern void AT24xx_uMultipleRead(INT8U slaveaddr,INT16U readaddr,INT8U len,INT8U *pBuffer);
 //extern void AT24xx_uMultipleWrite(INT8U slaveaddr,INT16U writeaddr,INT8U len,INT8U *pBuffer);
-extern void MS5525DSO_prepare_to_read(void);
+//extern INT16U MS5525DSO_PROM_SENS_T1(void);
+//extern INT16U MS5525DSO_PROM_OFF_T1(void);
+//extern INT16U MS5525DSO_PROM_TCS(void);
+//extern INT16U MS5525DSO_PROM_TCO(void);
+//extern INT16U MS5525DSO_TREF(void);
+//extern INT16U MS5525DSO_TEMPSENS(void);
+extern INT16U MS5525DSO_PROM_CX(PROM_CX cx);
+
+extern void MS5525DSO_prepare_to_read(DX dx);
 extern void Init_MS5525DSO_sensor(void);
-extern INT32U MS5525DSO_readByte(void);
+extern INT32S MS5525DSO_readByte(void);
 extern void ADS115_enter_power_down_mode(void);
 extern void Init_honeywell_sensor(void);
 extern void ADS115_writeByte(INT8U slaveaddr,INT8U data);

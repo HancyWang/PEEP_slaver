@@ -104,6 +104,15 @@ typedef enum
 	LED_IN_TURN_MODE3,
 }LED_IN_TURN_STATE;
 
+typedef enum
+{
+	DELAY_BEFORE_START,
+	DELAY_6ms,
+	DELAY_3ms,
+	DELAY_24ms
+}DELAY_ID;
+
+
 void init_PWMState(void);
 
 void TaskDataSend (void);

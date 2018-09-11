@@ -46,3 +46,4 @@ stm32f070xb\app.o: LOAD\APP\key_power_on_task.h
 stm32f070xb\app.o: LOAD\APP\send_data_to_phone.h
 stm32f070xb\app.o: LOAD\APP\i2c.h
 stm32f070xb\app.o: LOAD\APP\common.h
+stm32f070xb\app.o: .\LOAD\SYSTEM\delay.h

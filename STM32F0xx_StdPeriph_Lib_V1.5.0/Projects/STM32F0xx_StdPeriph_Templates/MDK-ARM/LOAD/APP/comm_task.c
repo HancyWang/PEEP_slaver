@@ -63,10 +63,13 @@ BOOL b_end_of_treatment=FALSE;
  uint32_t detectPalm_cnt=0;
  uint32_t noPalm_cnt=0;
 
- BOOL PWM1_timing_flag=TRUE;
- BOOL PWM2_timing_flag=TRUE; 
- BOOL PWM3_timing_flag=TRUE;
-
+// BOOL PWM1_timing_flag=TRUE;
+BOOL DELAY_BEFORE_START_timing_flag=TRUE;
+// BOOL PWM2_timing_flag=TRUE; 
+BOOL DELAY_3ms_timing_flag=TRUE;
+// BOOL PWM3_timing_flag=TRUE;
+ BOOL DELAY_6ms_timing_flag=TRUE;
+BOOL DELAY_24ms_timing_flag=TRUE;
 
 
  BOOL led_bink_timing_flag=TRUE;
@@ -99,9 +102,14 @@ uint32_t prev_keyPressOrRelease_os_tick;
 uint32_t prev_usbCharge_os_tick;
 uint32_t prev_beep_os_tick;
 uint32_t prev_WaitBeforeStart_os_tick;
-uint32_t prev_PWM1_os_tick;
-uint32_t prev_PWM2_os_tick;
-uint32_t prev_PWM3_os_tick;
+//uint32_t prev_PWM1_os_tick;
+uint32_t prev_DELAY_BEFORE_START_os_tick;
+//uint32_t prev_PWM2_os_tick;
+uint32_t prev_DELAY_3ms_os_tick;
+//uint32_t prev_PWM3_os_tick;
+uint32_t prev_DELAY_6ms_os_tick;
+uint32_t prev_DELAY_24ms_os_tick;
+
 uint32_t prev_PWM4_os_tick;
 uint32_t prev_PWM5_os_tick;
 uint32_t* p_prev_os_tick;
@@ -216,6 +224,9 @@ BEEP_STATE beep_state=BEEP_INIT;
 uint16_t wait_between_total_cnt=0;
  uint8_t value=0;
  
+static BOOL* b_timing_flag;
+
+ 
 //*********************debug*******************
 //cycles_record，仅仅是用来测试的，正式的版本不需要这个
 #ifdef _DEBUG_TEST_CYCLES
@@ -232,6 +243,86 @@ uint32_t debug_cycles_record[3]={0};
 static BOOL ModuleUnPackFrame(void);
 static BOOL ModuleProcessPacket(UINT8 *pData);
 static UINT8 CheckCheckSum(UINT8* pData, UINT8 nLen);
+
+
+
+
+//定时x毫秒,n_ms最大就255s，255000
+BOOL Is_timing_Xmillisec(uint32_t n_ms,uint8_t ID)
+{
+	switch(ID)
+	{
+		case DELAY_BEFORE_START:      //
+			b_timing_flag=&DELAY_BEFORE_START_timing_flag;
+			p_prev_os_tick=&prev_DELAY_BEFORE_START_os_tick;
+			break;
+		case DELAY_3ms:    
+			b_timing_flag=&DELAY_3ms_timing_flag;
+			p_prev_os_tick=&prev_DELAY_3ms_os_tick;
+			break;
+		case DELAY_6ms:    
+			b_timing_flag=&DELAY_6ms_timing_flag;
+			p_prev_os_tick=&prev_DELAY_6ms_os_tick;
+			break;
+	
+//		case 7:   //模式开关的按键时间 ,不适合用这个代码
+//			b_timing_flag=&switch_bnt_timing_flag;
+//			p_prev_os_tick=&prev_switchBtn_os_tick;
+//			break;
+		case DELAY_24ms:   //release gas
+			b_timing_flag=&DELAY_24ms_timing_flag;
+			p_prev_os_tick=&prev_DELAY_24ms_os_tick;
+			break;
+//		case 10:                   //没侦测到手时，LED闪烁
+//			b_timing_flag=&led_bink_timing_flag;
+//			p_prev_os_tick=&prev_ledBlink_os_tick;
+//			break;
+//		case 11:                   //没侦测到手时，蜂鸣器鸣叫
+//			b_timing_flag=&beep_timing_flag;
+//			p_prev_os_tick=&prev_beep_os_tick;
+//		case 12:                   //USB充电
+//			b_timing_flag=&usb_charge_timing_flag;
+//			p_prev_os_tick=&prev_usbCharge_os_tick;
+//		case 13:                 //开关机键
+//			b_timing_flag=&key_Press_or_Release_timing_flag;
+//			p_prev_os_tick=&prev_keyPressOrRelease_os_tick;
+//		case 14:                 //模式按键长按，自检
+//			b_timing_flag=&key_self_test_timing_flag;
+//			p_prev_os_tick=&prev_selfTest_os_tick;
+//			break;
+		default:
+			break;
+	}
+	
+	if(*b_timing_flag==TRUE)
+	{
+		*p_prev_os_tick=os_ticks;
+		*b_timing_flag=FALSE;
+	}
+	else
+	{
+		if(os_ticks+n_ms<os_ticks) //如果os_ticks+n_ms溢出了，那么os_ticks+n_ms必然小于os_ticks
+		{
+			//*p_prev_os_tick=os_ticks;
+			if(os_ticks==os_ticks+n_ms)
+			{
+				*b_timing_flag=TRUE;
+				*p_prev_os_tick=0;
+				return TRUE;
+			}
+		}
+		else
+		{
+			if(os_ticks-*p_prev_os_tick>=n_ms)
+			{
+				*b_timing_flag=TRUE;
+				*p_prev_os_tick=0;
+				return TRUE;
+			}
+		}
+	}
+	return FALSE;
+}
 
 
 
@@ -404,7 +495,7 @@ void TaskDataSend (void)
 		//protocol_module_send_exp_flag(1);
 #ifdef _DEBUG
 #else
-		if(mcu_state==POWER_ON)
+		//if(mcu_state==POWER_ON)
 #endif
 		
 		{
@@ -417,7 +508,7 @@ void TaskDataSend (void)
 		}
 		
 		
-		os_delay_ms(SEND_TASK_ID, 28);  //mark一下
+		os_delay_ms(SEND_TASK_ID, 20);  //mark一下
 }
 
 
@@ -447,3 +538,6 @@ void CMD_ProcessTask (void)
 
 	os_delay_ms(RECEIVE_TASK_ID, 100);
 }
+
+
+

@@ -64,7 +64,7 @@
 
 
 
-#define UART_BAUDRATE   115200 
+#define UART_BAUDRATE   256000 
 
 #define DMA_CLKSRC RCC_AHBPeriph_DMA1
 //#define UART_DMA_RX_CHANNEL   DMA1_Channel3
@@ -88,7 +88,9 @@ void UartSendNBytes (uint8_t *p_buf, uint32_t num);
 int32_t GetUartReceiverResidualCnt(void);
 void Init_UART_WIFI(uint32_t BaudRate);
 void Init_UART_BLUETOOTH(uint32_t BaudRate);
-void USART_BLUETOOTH_SendBuf(uint8_t *pBuf, uint32_t u32Len);
+void USART_BLUETOOTH_SendBuf(uint8_t *s);
+//void USART_BLUETOOTH_SendBuf(USART_TypeDef * USARTx,uint8_t *s);
+//void USART_BLUETOOTH_SendBuf(uint8_t *pBuf, uint32_t u32Len);
 uint8_t USART_BLUETOOTH_ReciverBuf(void);
 void USART_WIFI_SendBuf(uint8_t *pBuf, uint32_t u32Len);
 uint8_t USART_WIFI_ReciverBuf(void);

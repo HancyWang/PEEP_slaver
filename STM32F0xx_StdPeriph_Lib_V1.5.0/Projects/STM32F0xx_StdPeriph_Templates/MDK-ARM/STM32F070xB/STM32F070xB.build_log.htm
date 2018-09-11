@@ -27,25 +27,61 @@ Project File Date:  08/30/2018
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'STM32F070xB'
+compiling main.c...
+compiling stm32f0xx_it.c...
+compiling hardware.c...
+compiling Motor_pwm.c...
 compiling app.c...
-LOAD\APP\app.c(155): warning:  #111-D: statement is unreachable
+LOAD\APP\app.c(165): warning:  #550-D: variable "TEMP"  was set but never used
+  		static __int64 dT,TEMP,OFF,SENS;
+LOAD\APP\app.c(166): warning:  #550-D: variable "P"  was set but never used
+  		static int P;
+LOAD\APP\app.c(173): warning:  #550-D: variable "a"  was set but never used
+  		int a;
+LOAD\APP\app.c(185): warning:  #111-D: statement is unreachable
   	os_delay_ms(TEST_TASK_ID, 50);
-LOAD\APP\app.c(123): warning:  #550-D: variable "data"  was set but never used
-  	static UINT32 data,data1;
-LOAD\APP\app.c(123): warning:  #550-D: variable "data1"  was set but never used
-  	static UINT32 data,data1;
-LOAD\APP\app.c: 3 warnings, 0 errors
+LOAD\APP\app.c(129): warning:  #550-D: variable "data"  was set but never used
+  	static unsigned int data,d1,d2;
+LOAD\APP\app.c(111): warning:  #550-D: variable "debug_prev_os_tick"  was set but never used
+  static uint32_t debug_prev_os_tick;
+LOAD\APP\app.c(112): warning:  #550-D: variable "debug_after_os_tick"  was set but never used
+  static uint32_t debug_after_os_tick;
+LOAD\APP\app.c: 7 warnings, 0 errors
+compiling comm_task.c...
+compiling send_data_to_phone.c...
+LOAD\APP\send_data_to_phone.c(42): warning:  #550-D: variable "TEMP"  was set but never used
+  	 __int64 dT,TEMP,OFF,SENS;
+LOAD\APP\send_data_to_phone.c(26): warning:  #177-D: variable "delay_cnt"  was declared but never referenced
+  static uint8_t delay_cnt;
+LOAD\APP\send_data_to_phone.c(27): warning:  #177-D: variable "MS5525DSO_cnt"  was declared but never referenced
+  static uint8_t MS5525DSO_cnt;
+LOAD\APP\send_data_to_phone.c(29): warning:  #177-D: variable "honeywell_data"  was declared but never referenced
+  static unsigned int honeywell_data; 	 //压力传感器数值
+LOAD\APP\send_data_to_phone.c(30): warning:  #177-D: variable "p_diff"  was declared but never referenced
+  static int p_diff;										//压差传感器数值
+LOAD\APP\send_data_to_phone.c(31): warning:  #177-D: variable "send_cnt"  was declared but never referenced
+  static uint16_t send_cnt;							//
+LOAD\APP\send_data_to_phone.c(35): warning:  #177-D: variable "debug_os_tick_prev"  was declared but never referenced
+  static uint32_t debug_os_tick_prev;
+LOAD\APP\send_data_to_phone.c(36): warning:  #177-D: variable "debug_os_tick_after"  was declared but never referenced
+  static uint32_t debug_os_tick_after;
+LOAD\APP\send_data_to_phone.c(38): warning:  #177-D: variable "delay_flag"  was declared but never referenced
+  static uint8_t delay_flag=1;
+LOAD\APP\send_data_to_phone.c: 9 warnings, 0 errors
+compiling key_power_on_task.c...
+compiling os_core.c...
+compiling protocol_module.c...
 linking...
-Program Size: Code=4100 RO-data=224 RW-data=52 ZI-data=1204  
+Program Size: Code=6372 RO-data=224 RW-data=128 ZI-data=1208  
 FromELF: creating hex file...
-"STM32F070xB\STM32F070xB.axf" - 0 Error(s), 3 Warning(s).
+"STM32F070xB\STM32F070xB.axf" - 0 Error(s), 16 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_STM32F070xB
   D:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:22
 </pre>
 </body>
 </html>

@@ -9,7 +9,7 @@ typedef    signed short int       INT16S;
 typedef    unsigned long          INT32U;
 typedef    signed long            INT32S;
 typedef    float                  FP32;
-typedef    long double            FP64;
+typedef    long double            FP64;		
 
 //typedef    enum {FALSE = 0, TRUE = !FALSE} bool;
 

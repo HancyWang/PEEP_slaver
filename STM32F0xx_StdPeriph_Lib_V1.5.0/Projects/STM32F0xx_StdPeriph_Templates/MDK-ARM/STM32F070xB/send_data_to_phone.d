@@ -37,3 +37,8 @@ stm32f070xb\send_data_to_phone.o: .\LOAD\OS\os_cfg.h
 stm32f070xb\send_data_to_phone.o: .\LOAD\SYSTEM\serial_port.h
 stm32f070xb\send_data_to_phone.o: .\LOAD\User\device_type.h
 stm32f070xb\send_data_to_phone.o: LOAD\APP\key_power_on_task.h
+stm32f070xb\send_data_to_phone.o: .\LOAD\SYSTEM\delay.h
+stm32f070xb\send_data_to_phone.o: LOAD\APP\i2c.h
+stm32f070xb\send_data_to_phone.o: LOAD\APP\common.h
+stm32f070xb\send_data_to_phone.o: LOAD\APP\comm_task.h
+stm32f070xb\send_data_to_phone.o: .\LOAD\SYSTEM\fifo\datatype.h

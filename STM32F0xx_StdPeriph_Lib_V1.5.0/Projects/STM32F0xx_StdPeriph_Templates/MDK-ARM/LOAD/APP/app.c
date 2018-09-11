@@ -30,6 +30,10 @@
 //#include "store_fifo.h"
 #include "send_data_to_phone.h"
 #include "i2c.h"
+#include "delay.h"
+
+//#include <stdint.h>
+//#include <math.h>
 /**********************************
 *宏定义
 ***********************************/
@@ -80,15 +84,14 @@ void init_task(void)
 //	fifoInit(&send_fifo,send_buf,SEND_BUF_LEN);
 //	UARTInit(g_CmdReceive.m_Buf1, BUF1_LENGTH);	
 //	Init_Receive(&g_CmdReceive);
-//	//init_system(b_Is_PCB_PowerOn);
 
 //	os_create_task(TaskDataSend, OS_TRUE, SEND_TASK_ID);
 //	os_create_task(CMD_ProcessTask, OS_TRUE, RECEIVE_TASK_ID);
 
-	//os_create_task(test, OS_TRUE, TASK_TEST_ID);TASK_TEST_ID
+	//os_create_task(test, OS_TRUE, TASK_TEST_ID);
 	os_create_task(test_task,OS_TRUE,TASK_TEST_ID);
 	//os_create_task(key_power_on_task, OS_TRUE, KEY_LED_TASK_ID);
-//	os_create_task(send_data_to_phone_task, OS_TRUE, KEY_SEND_DATA_TO_PHONE_TASK_ID);
+	//os_create_task(send_data_to_phone_task, OS_TRUE, KEY_SEND_DATA_TO_PHONE_TASK_ID);
 	
 	//os_create_task(get_switch_mode,OS_TRUE,TASK_GET_SWITCH_MODE);
 	//os_create_task(check_selectedMode_ouputPWM,OS_TRUE,TASK_OUTPUT_PWM);
@@ -104,6 +107,9 @@ void init_task(void)
 }
 
 //测试任务，专门用来调试代码
+extern uint32_t os_ticks;
+static uint32_t debug_prev_os_tick;
+static uint32_t debug_after_os_tick;
 void test_task(void)
 {
 //	//GPIO_ResetBits(GPIOB,GPIO_Pin_3|GPIO_Pin_4);
@@ -120,28 +126,52 @@ void test_task(void)
 //	Delay_ms(10);
 	
 	//测试honeywell sensor
-	static UINT32 data,data1;
+	static unsigned int data,d1,d2;
+	static UINT16 c1,c2,c3,c4,c5,c6;  //6个PROM的值
 	Init_honeywell_sensor();
 	Delay_ms(5);
 ////	Honeywell_ready_for_read();
 //////		Init_ADS115();
 //		Delay_ms(10);
 	
+	//复位MS5525DSO
 	Init_MS5525DSO_sensor();
 		Delay_ms(5);
+	//读取PROM值，一共6个值
+
+	c1=MS5525DSO_PROM_CX(C1);
+	c2=MS5525DSO_PROM_CX(C2);
+	c3=MS5525DSO_PROM_CX(C3);
+	c4=MS5525DSO_PROM_CX(C4);
+	c5=MS5525DSO_PROM_CX(C5);
+	c6=MS5525DSO_PROM_CX(C6);
 	
 	while(1)
 	{
 		Init_honeywell_sensor();
-		//while(0x60==Honeywell_ready_for_read()){}    //可以使用这个while语句，也可以使用delay_ms(5)
-		Delay_ms(5);
+		MS5525DSO_prepare_to_read(D1);
+		Delay_ms(1);
+		d1=MS5525DSO_readByte();
+		
+		MS5525DSO_prepare_to_read(D2);
+		Delay_ms(1);
+		d2=MS5525DSO_readByte();
+		
+		Delay_ms(3);
+		
+		debug_prev_os_tick=os_ticks;
 		data=honeywell_readByte();
-//		Delay_ms(5);
-		
-		
-		MS5525DSO_prepare_to_read();
-		Delay_ms(8);
-		data1=MS5525DSO_readByte();
+		//计算压力值
+		static __int64 dT,TEMP,OFF,SENS;
+		static int P;
+		dT=d2-(c5<<7);  //D2 - C5 * 2^7
+		TEMP=2000+((dT*c6)>>21);  //TEMP=2000+dT*C6/2^21
+		OFF=(c2<<17)+((c4*dT)>>5);   //OFF=C2*2^17 +(C4*dT)/2^5
+		SENS=(c1<<15)+((c3*dT)>>7); //C1*2^15 +(C3*dT)/2^7
+		P=(d1*(SENS>>21)-OFF)>>15;    //(D1*SENS/2^21 -OFF)/2^15
+		 debug_after_os_tick=os_ticks;
+		int a;
+		a=1;
 	}	
 	
 //	uint8_t data=0x34;

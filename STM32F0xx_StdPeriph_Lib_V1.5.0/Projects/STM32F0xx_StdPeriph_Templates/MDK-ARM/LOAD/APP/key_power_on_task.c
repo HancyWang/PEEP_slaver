@@ -701,18 +701,6 @@ void EnterStopMode()
 static uint8_t tmp=0;
 void test(void)
 {
-	//set_led(LED_ID_GREEN,TRUE);
-	//set_led(LED_ID_YELLOW,TRUE);
-//	for(int i=0;i<2000;i++)
-//	{
-//		set_led(LED_ID_GREEN,TRUE);
-//		//set_led(LED_ID_YELLOW,TRUE);
-//		delay_ms(1000);
-//		set_led(LED_ID_GREEN,FALSE);
-//		//set_led(LED_ID_YELLOW,FALSE);
-//		delay_ms(1000);
-//	}
-////	
 	if(tmp==50)
 	{
 		tmp=0;
@@ -725,48 +713,6 @@ void test(void)
 		tmp++;
 		//set_led(LED_ID_GREEN,FALSE);
 	}
-	#if 0
-//	//ÉèÖÃPB7
-////	GPIO_InitTypeDef  GPIO_InitStructure;
-////	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
-////	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-////	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-////	//GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-////	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-////	//GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-////	GPIO_Init(GPIOB, &GPIO_InitStructure);
-////	GPIO_ResetBits(GPIOB,GPIO_Pin_7);
-//	
-//	//ÉèÖÃPB8
-//	GPIO_InitTypeDef  GPIO_InitStructure;
-//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
-//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-//	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-//	//GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-//	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-//	//GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//	GPIO_Init(GPIOB, &GPIO_InitStructure);
-//	GPIO_SetBits(GPIOB,GPIO_Pin_8);
-//	Delay_ms(10);
-//	
-//	//²âÊÔhoneywell sensor
-//	static UINT32 data;
-//	Init_I2C_MP();
-////		//Delay_ms(10);
-////	Honeywell_ready_for_read();
-//////		Init_ADS115();
-//		Delay_ms(10);
-//	
-//	while(1)
-//	{
-//		Init_I2C_MP();
-//		Delay_ms(5);
-//		Honeywell_ready_for_read();
-//		Delay_ms(5);
-//		data=honeywell_readByte();
-////		Delay_ms(5);
-//	}	
-#endif
 	os_delay_ms(TASK_TEST_ID, 20);
 }
 

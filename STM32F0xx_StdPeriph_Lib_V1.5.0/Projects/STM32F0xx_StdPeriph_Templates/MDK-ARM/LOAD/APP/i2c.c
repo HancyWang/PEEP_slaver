@@ -356,20 +356,75 @@ void Init_MS5525DSO_sensor(void)   //¸´Î»²Ù×÷
 	MS5525DSO_I2C_Stop();
 }
 
-void MS5525DSO_prepare_to_read()
+
+INT16U MS5525DSO_PROM_CX(PROM_CX cx)
+{
+	INT8U data15_8,data7_0;
+	MS5525DSO_I2C_Start();
+	MS5525DSO_I2C_SendByte(0xEE);     
+	MS5525DSO_I2C_RecAck();
+	switch(cx)
+	{
+		case C1:
+			MS5525DSO_I2C_SendByte(0xA2); 
+			break;
+		case C2:
+			MS5525DSO_I2C_SendByte(0xA4); 
+			break;
+		case C3:
+			MS5525DSO_I2C_SendByte(0xA6); 
+			break;
+		case C4:
+			MS5525DSO_I2C_SendByte(0xA8); 
+			break;
+		case C5:
+			MS5525DSO_I2C_SendByte(0xAA); 
+			break;
+		case C6:
+			MS5525DSO_I2C_SendByte(0xAE); 
+			break;
+		default:
+			break;
+	} 
+	MS5525DSO_I2C_RecAck();
+	MS5525DSO_I2C_Stop();
+	
+	MS5525DSO_I2C_Start();
+	MS5525DSO_I2C_SendByte(0xEF);     
+	MS5525DSO_I2C_RecAck();
+	data15_8=MS5525DSO_I2C_RecByte();
+	MS5525DSO_I2C_SendAck();
+	data7_0=MS5525DSO_I2C_RecByte();
+	MS5525DSO_I2C_SendNak();
+	MS5525DSO_I2C_Stop();
+	
+	return data15_8*256+data7_0;
+}
+
+void MS5525DSO_prepare_to_read(DX dx)
 {
 	//I 2 C Command to initiate a pressure conversion
 	MS5525DSO_I2C_Start();
 	MS5525DSO_I2C_SendByte(0xEE);
 	MS5525DSO_I2C_RecAck();  
-	MS5525DSO_I2C_SendByte(0x48);  //0x 0100 1000,Convert D1(OSR=4096)
+	switch(dx)
+	{
+		case D1:
+			MS5525DSO_I2C_SendByte(0x40);  
+			break;
+		case D2:
+			MS5525DSO_I2C_SendByte(0x50);
+			break;
+		default:
+			break;
+	}
 	MS5525DSO_I2C_RecAck();
 	MS5525DSO_I2C_Stop();
 }
 
-INT32U MS5525DSO_readByte()
+INT32S MS5525DSO_readByte()
 {
-	INT8U data23_16,data15_8,data7_0;
+	INT8S data23_16,data15_8,data7_0;
 		
 	MS5525DSO_I2C_Start();
 	MS5525DSO_I2C_SendByte(0xEE);
