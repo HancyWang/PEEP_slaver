@@ -41,6 +41,8 @@
 "stm32f070xb\i2c.o"
 "stm32f070xb\key_power_on_task.o"
 "stm32f070xb\send_data_to_phone.o"
+"stm32f070xb\honeywell_sampling_data.o"
+"stm32f070xb\ms5525dso_sampling_data.o"
 "stm32f070xb\os_core.o"
 "stm32f070xb\protocol_module.o"
 --library_type=microlib --strict --scatter "STM32F070xB\STM32F070xB.sct"

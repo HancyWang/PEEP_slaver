@@ -4,6 +4,10 @@
 #include "delay.h"
 #include "i2c.h"
 #include "comm_task.h"
+#include "honeywell_sampling_data.h"
+#include "MS5525DSO_sampling_data.h"
+#include <string.h>
+#include <math.h>
 
 #define HONEYWELL_RATE			11110   //斜率
 #define HONEYWELL_INTERCEPT 383196	//截距
@@ -14,41 +18,37 @@ extern MCU_STATE mcu_state;
 
 typedef enum 
 {
-	PRE_SEND,
-	COLLECT_ADC_DATA_AND_SEND,
+	SEND_PRE,
+	SEND_INIT_TWO_SENSORS,
+	SEND_DELAY_1000us_1,
+	SEND_DELAY_1000us_2,
+	SEND_DELAY_3000us,
+	SEND_DATA_TO_PHONE,
 	SEND_NONE
 }SEND_STATE;
 
-static SEND_STATE send_state=PRE_SEND;
-static BOOL b_initADC_sensor=1;
-static unsigned int d1,d2;
-static uint16_t c1,c2,c3,c4,c5,c6;  //6个PROM的值
-static uint8_t delay_cnt;
-static uint8_t MS5525DSO_cnt;
 
-static unsigned int honeywell_data; 	 //压力传感器数值
-static int p_diff;										//压差传感器数值
+//unsigned int d1,d2;
+uint16_t c1,c2,c3,c4,c5,c6;  //6个PROM的值
+
+static SEND_STATE send_state=SEND_PRE;
+static BOOL b_initADC_sensor=1;
+
+
+unsigned int honeywell_data; 	 //压力传感器数值
+int p_diff;										//压差传感器数值
+
 static uint16_t send_cnt;							//
 static uint16_t honeywell_buff[4];   
 static uint16_t MS5525DSO_buff[4];
 
-static uint32_t debug_os_tick_prev;
-static uint32_t debug_os_tick_after;
-extern uint32_t os_ticks;
-static uint8_t delay_flag=1;
 
-int cal_diff_pressure_value()
-{
-	 __int64 dT,TEMP,OFF,SENS;
-	 int P;
-	dT=d2-c5*128;  //D2 - C5 * 2^7
-	TEMP=2000+dT*c6/2097152;  //TEMP=2000+dT*C6/2^21
-	OFF=c2*131072+(c4*dT)/32;   //OFF=C2*2^17 +(C4*dT)/2^5
-	SENS=c1*32768+(c3*dT)/128; //C1*2^15 +(C3*dT)/2^7
-	P=(d1*SENS/2097152-OFF)/32768;    //(D1*SENS/2^21 -OFF)/2^15
-	return P;
-}
+extern HONEYWELL_STATE honeywell_state;
+extern MS5525DSO_STATE MS5525DSO_state;
+extern int HONEYWELL_ZERO_POINT;
+extern int MS5525DSO_ZERO_POINT;
 
+//将4次采集到的数据填充到指定的p_buffer中
 void fill_buffer_send(uint8_t* p_buffer)
 {
 	uint16_t sum=0;
@@ -57,33 +57,67 @@ void fill_buffer_send(uint8_t* p_buffer)
 	for(uint8_t i=0;i<4;i++)   //填充honeywell的数据
 	{
 		sum+=honeywell_buff[i];
-		*p_buffer++=honeywell_buff[i]/256;
+		*p_buffer++=honeywell_buff[i]>>8;
 		*p_buffer++=honeywell_buff[i]%256;
 	}
 	for(uint8_t i=0;i<4;i++)   //填充压差的数据
 	{
 		sum+=MS5525DSO_buff[i];
-		*p_buffer++=MS5525DSO_buff[i]/256;
-		*p_buffer++=honeywell_buff[i]%256;
+		*p_buffer++=MS5525DSO_buff[i]>>8;
+		*p_buffer++=MS5525DSO_buff[i]%256;
 	}
-	*p_buffer++=sum/256;  //填充checksum
+	*p_buffer++=sum>>8;  //填充checksum
 	*p_buffer=sum%256;
+	
+	//清空buffer
+	memset(honeywell_buff,0,4);
+	memset(MS5525DSO_buff,0,4);
+}
+//Honeywell,将3个字节的ADC数据转换成2字节的PSI数据
+uint16_t cal_honeywell_data(int data)
+{
+	int diff;
+//	diff=data-419430;
+	diff=data-HONEYWELL_ZERO_POINT;
+	if(diff>0)
+	{
+		//3999=5.8*6.8948*100,(量程30kpa=5.8psi,1psi=6.8948kpa,1000表示放大1000倍，上位机需要自己除以1000来还原)
+		//由于diff*3999会超过int的正量程(24亿),用uinsigned int 也就42亿，不够大
+		//现在将3999改成400*10
+		return diff*400/3355443*100;  
+//		return diff*1900/11110;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
-//static uint8_t delay_3ms_flag=1;
-//static uint8_t delay_6ms_flag=1;
-//static uint8_t delay_24ms_flag=1;
+
+//MS5525DSO,将3字节的ADC数据转换成2字节的流量数据
+//这个算法待写
+uint16_t cal_MS5525DSO_data(int data)
+{
+	static int diff;
+	static int result;
+	diff=data+(0-MS5525DSO_ZERO_POINT);
+	if(diff>0)
+	{
+		result= sqrt(2*diff*13)*51*125/100;
+		return result;
+	}
+}
 
 void send_data_to_phone_task()
 {
 	//if(mcu_state==POWER_ON)
 	{
 		//1.准备
-		if(send_state==PRE_SEND)  //延迟210ms,让蓝牙准备好,传感器初始化
+		if(send_state==SEND_PRE)  //延迟210ms,让蓝牙准备好,传感器初始化
 		{
-			if(Is_timing_Xmillisec(200,DELAY_BEFORE_START))
+			if(Is_timing_X10us(200*100,DELAY_BEFORE_START))
 			{
-				send_state=COLLECT_ADC_DATA_AND_SEND;   //进入采集数据阶段
+				send_state=SEND_NONE;
 				
 				//读取压差传感器PROM值，一共6个值
 				c1=MS5525DSO_PROM_CX(C1);
@@ -92,6 +126,9 @@ void send_data_to_phone_task()
 				c4=MS5525DSO_PROM_CX(C4);
 				c5=MS5525DSO_PROM_CX(C5);
 				c6=MS5525DSO_PROM_CX(C6);
+				
+				honeywell_state=HONEYWELL_START;
+				MS5525DSO_state=MS5525DSO_START;
 			}
 			else
 			{
@@ -99,124 +136,49 @@ void send_data_to_phone_task()
 				{
 					Init_honeywell_sensor();	//测试honeywell sensor
 					Init_MS5525DSO_sensor(); //复位MS5525DSO
-					b_initADC_sensor=0;
+					b_initADC_sensor=0;		
 				}
 			}
 		}
 		
-		//2.采样flow sensor和pressure sensor的ADC值,发送数据
-		if(send_state==COLLECT_ADC_DATA_AND_SEND)  //采集adc值
+		if(honeywell_state==HONEYWELL_SAMPLE_DATA_FINISH&&MS5525DSO_state==MS5525DSO_SAMPLE_DATA_FINISH)
 		{
-//		
-//			if(Is_timing_Xmillisec(3,DELAY_3ms))
-//			{
-//				send_cnt++;
-//				d1=MS5525DSO_readByte();
-//				MS5525DSO_prepare_to_read(D2);
-//			}
-//			else
-//			{
-//				if(delay_flag)
-//				{
-//					Init_honeywell_sensor();
-//					MS5525DSO_prepare_to_read(D1);
-//					delay_flag=0;
-//				}
-//			}
-//			
-
-			
-			
-			
-			
-			
-			
-			
-//			if(Is_timing_Xmillisec(6,DELAY_6ms))
-//			{
-
-//				honeywell_data=honeywell_readByte();  
-//				d2=MS5525DSO_readByte();  
-//				p_diff=cal_diff_pressure_value();
-//				uint16_t honeywell_psi=190*(honeywell_data-HONEYWELL_INTERCEPT)/HONEYWELL_RATE;   //这个公式待考证
-//				honeywell_buff[send_cnt]=honeywell_psi; 
-//				MS5525DSO_buff[send_cnt]=p_diff;
-//			}
-//		
-//			
-//			if(Is_timing_Xmillisec(24,DELAY_24ms))
-//			{
-//				uint8_t buffer_send[19];
-//				//填充buffer_send[19]
-//				fill_buffer_send(buffer_send);
-//				//发送
-//				for(uint8_t i=0;i<sizeof(buffer_send);i++)
-//				{ 
-//					while(USART_GetFlagStatus(USART1,USART_FLAG_TC )==RESET);	
-//					USART_SendData(USART1,buffer_send[i]);
-//				}
-//			}
-//			
-
-			
-			
-			
-#if 0		
-			if(MS5525DSO_cnt==2)
-			{
-				MS5525DSO_cnt=0;
-				honeywell_data=honeywell_readByte();   //honeywell至少要5ms的时间来采集转换数据
-				d2=MS5525DSO_readByte();  //读取压差传感器d2值
-				
-				//计算压力值
+				honeywell_data=honeywell_readByte();
 				p_diff=cal_diff_pressure_value();
 				
-				if(2*send_cnt*SEND_DATA_TO_PHONE_PERIOD==24)
-				{
-					uint8_t buffer_send[19];
-					//填充buffer_send[19]
-					fill_buffer_send(buffer_send);
-					//发送
-					for(uint8_t i=0;i<sizeof(buffer_send);i++)
-					{ 
-						while(USART_GetFlagStatus(USART1,USART_FLAG_TC )==RESET);	
-						USART_SendData(USART1,buffer_send[i]);
-					}
-					debug_os_tick_after=os_ticks;
-					send_cnt=0;
-				}
-				else
-				{
-					//转换数据成psi,这里有问题的，数据还没转换，待改
-					uint16_t honeywell_psi=190*(honeywell_data-HONEYWELL_INTERCEPT)/HONEYWELL_RATE;   //这个公式待考证
-					honeywell_buff[send_cnt]=honeywell_psi; 
-					MS5525DSO_buff[send_cnt]=p_diff;
-					send_cnt++;
-				}
-			}
-			else
-			{
-				if(MS5525DSO_cnt==0)
-				{
-					debug_os_tick_prev=os_ticks;
-					Init_honeywell_sensor();
-					MS5525DSO_prepare_to_read(D1);
-				}
+				honeywell_buff[send_cnt]=cal_honeywell_data(honeywell_data);   //需要计算
+				MS5525DSO_buff[send_cnt]=cal_MS5525DSO_data(p_diff);    
+				send_cnt++;
 				
-				if(MS5525DSO_cnt==1)
+				if(send_cnt==4)
 				{
-					d1=MS5525DSO_readByte();  //延迟3ms获取压差传感器d1值
-					MS5525DSO_prepare_to_read(D2);  //准备读取d2
+					send_state=SEND_DATA_TO_PHONE;
+					
+					honeywell_state=HONEYWELL_START;
+					MS5525DSO_state=MS5525DSO_START;
 				}
-				
-				MS5525DSO_cnt++;
+		}
+		
+		if(send_state==SEND_DATA_TO_PHONE)
+		{
+			static uint8_t buffer[19];
+			fill_buffer_send(buffer);
+			for(uint8_t i=0;i<sizeof(buffer);i++)
+			{ 
+				while(USART_GetFlagStatus(USART1,USART_FLAG_TC )==RESET);	
+				USART_SendData(USART1,buffer[i]);
 			}
-#endif
+			static int debug_data_cnt;
+			debug_data_cnt+=19;
+			
+			send_cnt=0;
+			send_state=SEND_NONE;
+			
 		}
 	}
 		
 #if 0		
-//		//2.通过串口蓝牙，发送数据到手机
+//		//通过串口蓝牙，发送数据到手机，此代码专门用来debug
 //			uint8_t data1[19]={0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x10,
 //												0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19};
 ////			0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,0x30,
@@ -238,8 +200,7 @@ void send_data_to_phone_task()
 //			//GPIO_ResetBits(GPIOB,GPIO_Pin_9);
 #endif
 		
-		
-		os_delay_ms(KEY_SEND_DATA_TO_PHONE_TASK_ID, SEND_DATA_TO_PHONE_PERIOD); //3ms来一次
+		os_delay_10us(KEY_SEND_DATA_TO_PHONE_TASK_ID, SEND_DATA_TO_PHONE_PERIOD);//10*10us=100us
 }
 	
 

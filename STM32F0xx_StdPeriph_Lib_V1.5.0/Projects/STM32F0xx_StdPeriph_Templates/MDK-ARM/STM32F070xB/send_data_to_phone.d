@@ -42,3 +42,7 @@ stm32f070xb\send_data_to_phone.o: LOAD\APP\i2c.h
 stm32f070xb\send_data_to_phone.o: LOAD\APP\common.h
 stm32f070xb\send_data_to_phone.o: LOAD\APP\comm_task.h
 stm32f070xb\send_data_to_phone.o: .\LOAD\SYSTEM\fifo\datatype.h
+stm32f070xb\send_data_to_phone.o: LOAD\APP\honeywell_sampling_data.h
+stm32f070xb\send_data_to_phone.o: LOAD\APP\MS5525DSO_sampling_data.h
+stm32f070xb\send_data_to_phone.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32f070xb\send_data_to_phone.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

@@ -804,6 +804,7 @@ void key_power_on_task(void)
 		EnterStopMode();
 		init_system_afterWakeUp();
 	}
-	os_delay_ms(KEY_LED_TASK_ID, KEY_LED_PERIOD);
+	os_delay_10us(KEY_LED_TASK_ID, KEY_LED_PERIOD);  //20ms¿¥“ª¥Œ
+//	os_delay_ms(KEY_LED_TASK_ID, KEY_LED_PERIOD);
 }
 

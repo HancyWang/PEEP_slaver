@@ -7,7 +7,7 @@
 /**********************************
 *∫Í∂®“Â
 ***********************************/
-#define KEY_LED_PERIOD  20
+#define KEY_LED_PERIOD  2000
 #define CHECK_MODE_OUTPUT_PWM 10
 #define ONE_SEC_KEY_TIME   1000/KEY_LED_PERIOD
 /***********************************

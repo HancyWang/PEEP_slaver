@@ -445,7 +445,7 @@ INT32S MS5525DSO_readByte()
 	MS5525DSO_I2C_SendNak();
 	MS5525DSO_I2C_Stop();
 	
-	return data23_16*256*256+data15_8*256+data7_0;
+	return (data23_16<<16)+(data15_8<<8)+data7_0;
 }
 
 #if 0
@@ -481,7 +481,8 @@ INT32U honeywell_readByte()
 	data7_0=I2C_RecByte();
 	I2C_SendNak();
 	I2C_Stop();
-	return data_staus*256*256*256+data23_16*256*256+data15_8*256+data7_0;
+	return (data23_16<<16)+(data15_8<<8)+data7_0;
+//	return (data_staus<<24)+(data23_16<<16)+(data15_8<<8)+data7_0;
 }
 
 //这个sensor不用了，被honeywell取代了

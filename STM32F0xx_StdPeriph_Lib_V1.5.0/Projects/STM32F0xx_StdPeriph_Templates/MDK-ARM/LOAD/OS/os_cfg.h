@@ -8,8 +8,8 @@
 
 #define OS_MAX_TASK  15
 
-#define OS_TICKS_PER_SEC    1000u
-//#define OS_TICKS_PER_SEC    100u
+//#define OS_TICKS_PER_SEC    1000u
+#define OS_TICKS_PER_SEC    100000u
 
 #define OS_INIT    init_tim //初始化函數指針——初始化滴答時鐘
 #define OS_INIT_HEAD_FILE  "hardware.h" 

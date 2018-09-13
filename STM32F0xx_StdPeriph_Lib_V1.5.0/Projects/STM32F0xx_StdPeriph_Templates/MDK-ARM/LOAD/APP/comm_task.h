@@ -107,9 +107,13 @@ typedef enum
 typedef enum
 {
 	DELAY_BEFORE_START,
-	DELAY_6ms,
-	DELAY_3ms,
-	DELAY_24ms
+//	DELAY_6ms,
+//	DELAY_3ms,
+//	DELAY_24ms
+	DELAY_1000us_1,
+	DELAY_1000us_2,
+	DELAY_3000us,
+	HONEYWELL_DELAY_5000us
 }DELAY_ID;
 
 
@@ -126,7 +130,8 @@ void ResetParameter(unsigned char* buffer);
 void get_switch_mode(void);
 void ReleaseGas(void);
 void Red_LED_Blink(unsigned char seconds);
-BOOL Is_timing_Xmillisec(uint32_t n_ms,uint8_t ID);
+//BOOL Is_timing_Xmillisec(uint32_t n_ms,uint8_t ID);
+BOOL Is_timing_X10us(uint32_t x10us,uint8_t ID);
 void DetectPalm(void);
 void Detect_battery_and_tmp(void);
 void led_blink_beep(void);

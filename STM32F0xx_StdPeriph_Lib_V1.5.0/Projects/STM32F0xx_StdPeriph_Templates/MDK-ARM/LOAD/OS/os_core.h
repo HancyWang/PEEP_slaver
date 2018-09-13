@@ -9,7 +9,7 @@ typedef struct SCB_DATA
   void(*ptask)(void);
   uint8_t id;
   uint8_t run_en;
-  uint16_t delay_period;
+  uint32_t delay_period;
   uint32_t delay_start;
 }TCB_DATA;
 
@@ -23,5 +23,7 @@ void os_resume_task(uint8_t r_id);
 void os_pend_task(uint8_t r_id);
 void os_isr_ticks(void);
 void os_delay_ms(uint8_t r_id, uint32_t ms);
+void os_delay_100us(uint8_t r_id, uint32_t x100us);
+void os_delay_10us(uint8_t r_id, uint32_t x10us);
 
 #endif

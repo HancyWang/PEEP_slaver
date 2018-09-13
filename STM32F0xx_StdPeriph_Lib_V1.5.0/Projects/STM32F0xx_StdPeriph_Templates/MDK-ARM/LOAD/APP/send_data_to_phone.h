@@ -3,8 +3,8 @@
 
 #include "os_core.h"
 #include "app.h"
-//2ms÷¥––“ª¥Œ
-#define SEND_DATA_TO_PHONE_PERIOD 1
+
+#define SEND_DATA_TO_PHONE_PERIOD 10
 
 void send_data_to_phone_task(void);
 

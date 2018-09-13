@@ -47,3 +47,5 @@ stm32f070xb\app.o: LOAD\APP\send_data_to_phone.h
 stm32f070xb\app.o: LOAD\APP\i2c.h
 stm32f070xb\app.o: LOAD\APP\common.h
 stm32f070xb\app.o: .\LOAD\SYSTEM\delay.h
+stm32f070xb\app.o: LOAD\APP\honeywell_sampling_data.h
+stm32f070xb\app.o: LOAD\APP\MS5525DSO_sampling_data.h

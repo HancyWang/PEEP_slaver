@@ -31,6 +31,8 @@
 #include "send_data_to_phone.h"
 #include "i2c.h"
 #include "delay.h"
+#include "honeywell_sampling_data.h"
+#include "MS5525DSO_sampling_data.h"
 
 //#include <stdint.h>
 //#include <math.h>
@@ -89,9 +91,11 @@ void init_task(void)
 //	os_create_task(CMD_ProcessTask, OS_TRUE, RECEIVE_TASK_ID);
 
 	//os_create_task(test, OS_TRUE, TASK_TEST_ID);
-	os_create_task(test_task,OS_TRUE,TASK_TEST_ID);
+	//os_create_task(test_task,OS_TRUE,TASK_TEST_ID);
 	//os_create_task(key_power_on_task, OS_TRUE, KEY_LED_TASK_ID);
-	//os_create_task(send_data_to_phone_task, OS_TRUE, KEY_SEND_DATA_TO_PHONE_TASK_ID);
+	os_create_task(honeywell_sampling_data, OS_TRUE, HONEYWELL_SAMPLING_DATA_TASK_ID);
+	os_create_task(MS5525DSO_sampling_data, OS_TRUE, MS5525DSO_SAMPLING_DATA_TASK_ID);
+	os_create_task(send_data_to_phone_task, OS_TRUE, KEY_SEND_DATA_TO_PHONE_TASK_ID);
 	
 	//os_create_task(get_switch_mode,OS_TRUE,TASK_GET_SWITCH_MODE);
 	//os_create_task(check_selectedMode_ouputPWM,OS_TRUE,TASK_OUTPUT_PWM);
@@ -112,19 +116,6 @@ static uint32_t debug_prev_os_tick;
 static uint32_t debug_after_os_tick;
 void test_task(void)
 {
-//	//GPIO_ResetBits(GPIOB,GPIO_Pin_3|GPIO_Pin_4);
-//	//设置PB8
-//	GPIO_InitTypeDef  GPIO_InitStructure;
-//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
-//	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-//	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-//	//GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-//	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-//	//GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//	GPIO_Init(GPIOB, &GPIO_InitStructure);
-//	GPIO_SetBits(GPIOB,GPIO_Pin_8);
-//	Delay_ms(10);
-	
 	//测试honeywell sensor
 	static unsigned int data,d1,d2;
 	static UINT16 c1,c2,c3,c4,c5,c6;  //6个PROM的值
@@ -170,8 +161,6 @@ void test_task(void)
 		SENS=(c1<<15)+((c3*dT)>>7); //C1*2^15 +(C3*dT)/2^7
 		P=(d1*(SENS>>21)-OFF)>>15;    //(D1*SENS/2^21 -OFF)/2^15
 		 debug_after_os_tick=os_ticks;
-		int a;
-		a=1;
 	}	
 	
 //	uint8_t data=0x34;
@@ -181,6 +170,6 @@ void test_task(void)
 //		Delay_ms(100);
 //	}
 	
-	
-	os_delay_ms(TEST_TASK_ID, 50);
+	os_delay_100us(TEST_TASK_ID, 50);
+	//os_delay_ms(TEST_TASK_ID, 50);
 }

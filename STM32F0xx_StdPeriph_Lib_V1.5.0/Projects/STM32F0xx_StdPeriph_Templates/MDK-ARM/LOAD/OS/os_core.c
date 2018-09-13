@@ -107,6 +107,35 @@ void os_delay_ms(uint8_t r_id, uint32_t ms)
 	}   
 }
 
+
+void os_delay_100us(uint8_t r_id, uint32_t x100us)
+{
+	if(r_id > OS_MAX_TASK-1)
+    return;
+	else
+	{
+		uint8_t index = 0;
+    index = r_id;
+		
+		task_array[index].delay_start = os_ticks;
+    task_array[index].delay_period = x100us*OS_TICKS_PER_SEC/10000;
+	}   
+}
+
+void os_delay_10us(uint8_t r_id, uint32_t x10us)
+{
+	if(r_id > OS_MAX_TASK-1)
+	return;
+	else
+	{
+		uint8_t index = 0;
+    index = r_id;
+		
+		task_array[index].delay_start = os_ticks;
+    task_array[index].delay_period = x10us*OS_TICKS_PER_SEC/100000;
+	}  
+}
+
 /*
 * 系统滴答时钟中断
 */
