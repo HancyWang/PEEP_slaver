@@ -1577,7 +1577,7 @@ Image Symbol Table
     i.os_pend_task                           0x08001ff4   Section        0  os_core.o(i.os_pend_task)
     i.os_start                               0x08002014   Section        0  os_core.o(i.os_start)
     i.send_data_to_phone_task                0x08002090   Section        0  send_data_to_phone.o(i.send_data_to_phone_task)
-    i.sqrt                                   0x08002210   Section        0  sqrt.o(i.sqrt)
+    i.sqrt                                   0x08002220   Section        0  sqrt.o(i.sqrt)
     .data                                    0x20000000   Section       20  system_stm32f0xx.o(.data)
     .data                                    0x20000014   Section       16  stm32f0xx_rcc.o(.data)
     APBAHBPrescTable                         0x20000014   Data          16  stm32f0xx_rcc.o(.data)
@@ -1593,7 +1593,7 @@ Image Symbol Table
     .data                                    0x200000e4   Section        6  key_power_on_task.o(.data)
     tmp                                      0x200000e8   Data           1  key_power_on_task.o(.data)
     wakeup_Cnt                               0x200000e9   Data           1  key_power_on_task.o(.data)
-    .data                                    0x200000ec   Section       56  send_data_to_phone.o(.data)
+    .data                                    0x200000ec   Section       60  send_data_to_phone.o(.data)
     send_state                               0x200000f8   Data           1  send_data_to_phone.o(.data)
     b_initADC_sensor                         0x200000f9   Data           1  send_data_to_phone.o(.data)
     send_cnt                                 0x20000104   Data           2  send_data_to_phone.o(.data)
@@ -1601,24 +1601,25 @@ Image Symbol Table
     MS5525DSO_buff                           0x2000010e   Data           8  send_data_to_phone.o(.data)
     diff                                     0x20000118   Data           4  send_data_to_phone.o(.data)
     result                                   0x2000011c   Data           4  send_data_to_phone.o(.data)
-    debug_data_cnt                           0x20000120   Data           4  send_data_to_phone.o(.data)
-    .data                                    0x20000124   Section       12  honeywell_sampling_data.o(.data)
-    honeywelldata                            0x20000124   Data           4  honeywell_sampling_data.o(.data)
-    b_getHoneywellZeroPoint                  0x20000128   Data           1  honeywell_sampling_data.o(.data)
-    .data                                    0x20000130   Section       56  ms5525dso_sampling_data.o(.data)
-    b_getMS5525DSO_ZeroPoint                 0x20000140   Data           1  ms5525dso_sampling_data.o(.data)
-    dT                                       0x20000148   Data           8  ms5525dso_sampling_data.o(.data)
-    TEMP                                     0x20000150   Data           8  ms5525dso_sampling_data.o(.data)
-    OFF                                      0x20000158   Data           8  ms5525dso_sampling_data.o(.data)
-    SENS                                     0x20000160   Data           8  ms5525dso_sampling_data.o(.data)
-    .data                                    0x20000168   Section       12  os_core.o(.data)
-    index                                    0x20000170   Data           4  os_core.o(.data)
-    .data                                    0x20000174   Section        4  errno.o(.data)
-    _errno                                   0x20000174   Data           4  errno.o(.data)
-    .bss                                     0x20000178   Section       19  send_data_to_phone.o(.bss)
-    buffer                                   0x20000178   Data          19  send_data_to_phone.o(.bss)
-    .bss                                     0x2000018c   Section      240  os_core.o(.bss)
-    STACK                                    0x20000280   Section     1024  startup_stm32f070xb.o(STACK)
+    debug_data                               0x20000120   Data           2  send_data_to_phone.o(.data)
+    debug_data_cnt                           0x20000124   Data           4  send_data_to_phone.o(.data)
+    .data                                    0x20000128   Section       12  honeywell_sampling_data.o(.data)
+    honeywelldata                            0x20000128   Data           4  honeywell_sampling_data.o(.data)
+    b_getHoneywellZeroPoint                  0x2000012c   Data           1  honeywell_sampling_data.o(.data)
+    .data                                    0x20000138   Section       56  ms5525dso_sampling_data.o(.data)
+    b_getMS5525DSO_ZeroPoint                 0x20000148   Data           1  ms5525dso_sampling_data.o(.data)
+    dT                                       0x20000150   Data           8  ms5525dso_sampling_data.o(.data)
+    TEMP                                     0x20000158   Data           8  ms5525dso_sampling_data.o(.data)
+    OFF                                      0x20000160   Data           8  ms5525dso_sampling_data.o(.data)
+    SENS                                     0x20000168   Data           8  ms5525dso_sampling_data.o(.data)
+    .data                                    0x20000170   Section       12  os_core.o(.data)
+    index                                    0x20000178   Data           4  os_core.o(.data)
+    .data                                    0x2000017c   Section        4  errno.o(.data)
+    _errno                                   0x2000017c   Data           4  errno.o(.data)
+    .bss                                     0x20000180   Section       19  send_data_to_phone.o(.bss)
+    buffer                                   0x20000180   Data          19  send_data_to_phone.o(.bss)
+    .bss                                     0x20000194   Section      240  os_core.o(.bss)
+    STACK                                    0x20000288   Section     1024  startup_stm32f070xb.o(STACK)
 
     Global Symbols
 
@@ -1791,10 +1792,10 @@ Image Symbol Table
     os_isr_ticks                             0x08001fe5   Thumb Code    12  os_core.o(i.os_isr_ticks)
     os_pend_task                             0x08001ff5   Thumb Code    28  os_core.o(i.os_pend_task)
     os_start                                 0x08002015   Thumb Code   110  os_core.o(i.os_start)
-    send_data_to_phone_task                  0x08002091   Thumb Code   306  send_data_to_phone.o(i.send_data_to_phone_task)
-    sqrt                                     0x08002211   Thumb Code    66  sqrt.o(i.sqrt)
-    Region$$Table$$Base                      0x08002258   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08002278   Number         0  anon$$obj.o(Region$$Table)
+    send_data_to_phone_task                  0x08002091   Thumb Code   318  send_data_to_phone.o(i.send_data_to_phone_task)
+    sqrt                                     0x08002221   Thumb Code    66  sqrt.o(i.sqrt)
+    Region$$Table$$Base                      0x08002268   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08002288   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_stm32f0xx.o(.data)
     AHBPrescTable                            0x20000004   Data          16  system_stm32f0xx.o(.data)
     check_sum                                0x20000028   Data           2  comm_task.o(.data)
@@ -1898,17 +1899,17 @@ Image Symbol Table
     c6                                       0x200000f6   Data           2  send_data_to_phone.o(.data)
     honeywell_data                           0x200000fc   Data           4  send_data_to_phone.o(.data)
     p_diff                                   0x20000100   Data           4  send_data_to_phone.o(.data)
-    honeywell_state                          0x20000129   Data           1  honeywell_sampling_data.o(.data)
-    HONEYWELL_ZERO_POINT                     0x2000012c   Data           4  honeywell_sampling_data.o(.data)
-    d1                                       0x20000130   Data           4  ms5525dso_sampling_data.o(.data)
-    d2                                       0x20000134   Data           4  ms5525dso_sampling_data.o(.data)
-    MS5525DSO_state                          0x20000138   Data           1  ms5525dso_sampling_data.o(.data)
-    MS5525DSO_ZERO_POINT                     0x2000013c   Data           4  ms5525dso_sampling_data.o(.data)
-    os_ticks                                 0x20000168   Data           4  os_core.o(.data)
-    prev_pwm_tick_cnt                        0x2000016c   Data           2  os_core.o(.data)
-    pwm_tick_cnt                             0x2000016e   Data           2  os_core.o(.data)
-    task_array                               0x2000018c   Data         240  os_core.o(.bss)
-    __initial_sp                             0x20000680   Data           0  startup_stm32f070xb.o(STACK)
+    honeywell_state                          0x2000012d   Data           1  honeywell_sampling_data.o(.data)
+    HONEYWELL_ZERO_POINT                     0x20000130   Data           4  honeywell_sampling_data.o(.data)
+    d1                                       0x20000138   Data           4  ms5525dso_sampling_data.o(.data)
+    d2                                       0x2000013c   Data           4  ms5525dso_sampling_data.o(.data)
+    MS5525DSO_state                          0x20000140   Data           1  ms5525dso_sampling_data.o(.data)
+    MS5525DSO_ZERO_POINT                     0x20000144   Data           4  ms5525dso_sampling_data.o(.data)
+    os_ticks                                 0x20000170   Data           4  os_core.o(.data)
+    prev_pwm_tick_cnt                        0x20000174   Data           2  os_core.o(.data)
+    pwm_tick_cnt                             0x20000176   Data           2  os_core.o(.data)
+    task_array                               0x20000194   Data         240  os_core.o(.bss)
+    __initial_sp                             0x20000688   Data           0  startup_stm32f070xb.o(STACK)
 
 
 
@@ -1918,9 +1919,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000c1
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000023f0, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x000022b0])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00002408, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x000022c0])
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00002278, Max: 0x00020000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00002288, Max: 0x00020000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2061,12 +2062,12 @@ Memory Map of the image
     0x08001fe4   0x00000010   Code   RO         5192    i.os_isr_ticks      os_core.o
     0x08001ff4   0x00000020   Code   RO         5193    i.os_pend_task      os_core.o
     0x08002014   0x0000007c   Code   RO         5195    i.os_start          os_core.o
-    0x08002090   0x00000180   Code   RO         5083    i.send_data_to_phone_task  send_data_to_phone.o
-    0x08002210   0x00000048   Code   RO         5386    i.sqrt              m_ps.l(sqrt.o)
-    0x08002258   0x00000020   Data   RO         5452    Region$$Table       anon$$obj.o
+    0x08002090   0x00000190   Code   RO         5083    i.send_data_to_phone_task  send_data_to_phone.o
+    0x08002220   0x00000048   Code   RO         5386    i.sqrt              m_ps.l(sqrt.o)
+    0x08002268   0x00000020   Data   RO         5452    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000680, Max: 0x00004000, ABSOLUTE, COMPRESSED[0x00000038])
+    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000688, Max: 0x00004000, ABSOLUTE, COMPRESSED[0x00000038])
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2076,16 +2077,17 @@ Memory Map of the image
     0x20000028   0x000000bc   Data   RW         4646    .data               comm_task.o
     0x200000e4   0x00000006   Data   RW         5014    .data               key_power_on_task.o
     0x200000ea   0x00000002   PAD
-    0x200000ec   0x00000038   Data   RW         5085    .data               send_data_to_phone.o
-    0x20000124   0x0000000c   Data   RW         5134    .data               honeywell_sampling_data.o
-    0x20000130   0x00000038   Data   RW         5158    .data               ms5525dso_sampling_data.o
-    0x20000168   0x0000000c   Data   RW         5197    .data               os_core.o
-    0x20000174   0x00000004   Data   RW         5437    .data               mc_p.l(errno.o)
-    0x20000178   0x00000013   Zero   RW         5084    .bss                send_data_to_phone.o
-    0x2000018b   0x00000001   PAD
-    0x2000018c   0x000000f0   Zero   RW         5196    .bss                os_core.o
-    0x2000027c   0x00000004   PAD
-    0x20000280   0x00000400   Zero   RW            1    STACK               startup_stm32f070xb.o
+    0x200000ec   0x0000003c   Data   RW         5085    .data               send_data_to_phone.o
+    0x20000128   0x0000000c   Data   RW         5134    .data               honeywell_sampling_data.o
+    0x20000134   0x00000004   PAD
+    0x20000138   0x00000038   Data   RW         5158    .data               ms5525dso_sampling_data.o
+    0x20000170   0x0000000c   Data   RW         5197    .data               os_core.o
+    0x2000017c   0x00000004   Data   RW         5437    .data               mc_p.l(errno.o)
+    0x20000180   0x00000013   Zero   RW         5084    .bss                send_data_to_phone.o
+    0x20000193   0x00000001   PAD
+    0x20000194   0x000000f0   Zero   RW         5196    .bss                os_core.o
+    0x20000284   0x00000004   PAD
+    0x20000288   0x00000400   Zero   RW            1    STACK               startup_stm32f070xb.o
 
 
 ==============================================================================
@@ -2108,7 +2110,7 @@ Image component sizes
        452         76          0         56          0       1849   ms5525dso_sampling_data.o
        296         40          0         12        240       4857   os_core.o
         80          6          0          0          0      13784   rcc_configure.o
-       732        118          0         56         19       4811   send_data_to_phone.o
+       748        122          0         60         19       4851   send_data_to_phone.o
        128          4          0          0          0       1510   serial_port.o
         88         38        192          0       1024        848   startup_stm32f070xb.o
         40         12          0          0          0       1308   stm32f0xx_exti.o
@@ -2121,9 +2123,9 @@ Image component sizes
        476         46          0         20          0     201337   system_stm32f0xx.o
 
     ----------------------------------------------------------------------
-      7110        798        224        372       1288     350438   Object Totals
+      7126        802        224        380       1288     350478   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        16          0          0          2          5          0   (incl. Padding)
+        16          0          0          6          5          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -2177,15 +2179,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      8600        854        224        376       1288     347174   Grand Totals
-      8600        854        224         56       1288     347174   ELF Image Totals (compressed)
-      8600        854        224         56          0          0   ROM Totals
+      8616        858        224        384       1288     347214   Grand Totals
+      8616        858        224         56       1288     347214   ELF Image Totals (compressed)
+      8616        858        224         56          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 8824 (   8.62kB)
-    Total RW  Size (RW Data + ZI Data)              1664 (   1.63kB)
-    Total ROM Size (Code + RO Data + RW Data)       8880 (   8.67kB)
+    Total RO  Size (Code + RO Data)                 8840 (   8.63kB)
+    Total RW  Size (RW Data + ZI Data)              1672 (   1.63kB)
+    Total ROM Size (Code + RO Data + RW Data)       8896 (   8.69kB)
 
 ==============================================================================
 

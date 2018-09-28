@@ -2433,105 +2433,22 @@
           <Name>(105=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint>
-        <Bp>
-          <Number>0</Number>
-          <Type>0</Type>
-          <LineNumber>107</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134224642</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\LOAD\APP\send_data_to_phone.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\STM32F070xB\LOAD/APP/send_data_to_phone.c\107</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>103</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134224554</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\LOAD\APP\send_data_to_phone.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\STM32F070xB\LOAD/APP/send_data_to_phone.c\103</Expression>
-        </Bp>
-      </Breakpoint>
+      <Breakpoint/>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>send_cnt,0x0A</ItemText>
+          <ItemText>debug_data,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>honeywell_buff</ItemText>
+          <ItemText>p_diff,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>MS5525DSO_buff</ItemText>
-        </Ww>
-        <Ww>
-          <count>3</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>p_diff,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>4</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>honeywell_data</ItemText>
-        </Ww>
-        <Ww>
-          <count>5</count>
-          <WinNumber>1</WinNumber>
           <ItemText>send_cnt</ItemText>
-        </Ww>
-        <Ww>
-          <count>6</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>send_state</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>honeywell_state</ItemText>
-        </Ww>
-        <Ww>
-          <count>8</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>MS5525DSO_state</ItemText>
-        </Ww>
-        <Ww>
-          <count>9</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>buffer</ItemText>
-        </Ww>
-        <Ww>
-          <count>10</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>MS5525DSO_ZERO_POINT,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>11</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>diff</ItemText>
-        </Ww>
-        <Ww>
-          <count>12</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>data,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -2543,7 +2460,7 @@
         <Ww>
           <count>1</count>
           <WinNumber>2</WinNumber>
-          <ItemText>p_diff</ItemText>
+          <ItemText>p_diff,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
@@ -2613,17 +2530,17 @@
         <Ww>
           <count>15</count>
           <WinNumber>2</WinNumber>
-          <ItemText>MS5525DSO_buff</ItemText>
+          <ItemText>MS5525DSO_buff,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>16</count>
           <WinNumber>2</WinNumber>
-          <ItemText>honeywell_buff</ItemText>
+          <ItemText>buffer</ItemText>
         </Ww>
         <Ww>
           <count>17</count>
           <WinNumber>2</WinNumber>
-          <ItemText>buffer</ItemText>
+          <ItemText>debug_data,0x0A</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>
@@ -3329,7 +3246,7 @@
       <GroupNumber>6</GroupNumber>
       <FileNumber>52</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\LOAD\APP\MS5525DSO_sampling_data.c</PathWithFileName>

@@ -146,8 +146,13 @@ void send_data_to_phone_task()
 				honeywell_data=honeywell_readByte();
 				p_diff=cal_diff_pressure_value();
 				
-				honeywell_buff[send_cnt]=cal_honeywell_data(honeywell_data);   //ÐèÒª¼ÆËã
-				MS5525DSO_buff[send_cnt]=cal_MS5525DSO_data(p_diff);    
+				honeywell_buff[send_cnt]=cal_honeywell_data(honeywell_data);   //ÐèÒª¼ÆË
+			
+				static uint16_t debug_data;
+				debug_data=cal_MS5525DSO_data(p_diff);
+			
+				MS5525DSO_buff[send_cnt]=cal_MS5525DSO_data(p_diff);  
+			
 				send_cnt++;
 				
 				if(send_cnt==4)
