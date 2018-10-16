@@ -2450,97 +2450,42 @@
           <WinNumber>1</WinNumber>
           <ItemText>send_cnt</ItemText>
         </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>RegularConvData_Tab,0x0A</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
           <count>0</count>
           <WinNumber>2</WinNumber>
-          <ItemText>honeywell_data,0x10</ItemText>
+          <ItemText>pressure_value,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>2</WinNumber>
-          <ItemText>p_diff,0x0A</ItemText>
+          <ItemText>nData,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>2</WinNumber>
-          <ItemText>d1,0x0A</ItemText>
+          <ItemText>send2Phone_buffer</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>2</WinNumber>
-          <ItemText>d2,0x0A</ItemText>
+          <ItemText>MPVX70_buffer,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>2</WinNumber>
-          <ItemText>c1</ItemText>
+          <ItemText>SDP31_buffer,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>2</WinNumber>
-          <ItemText>c2</ItemText>
-        </Ww>
-        <Ww>
-          <count>6</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>c3</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>c4</ItemText>
-        </Ww>
-        <Ww>
-          <count>8</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>c5</ItemText>
-        </Ww>
-        <Ww>
-          <count>9</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>c6</ItemText>
-        </Ww>
-        <Ww>
-          <count>10</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>dT</ItemText>
-        </Ww>
-        <Ww>
-          <count>11</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>TEMP</ItemText>
-        </Ww>
-        <Ww>
-          <count>12</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>OFF</ItemText>
-        </Ww>
-        <Ww>
-          <count>13</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>SENS</ItemText>
-        </Ww>
-        <Ww>
-          <count>14</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>honeywell_buff</ItemText>
-        </Ww>
-        <Ww>
-          <count>15</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>MS5525DSO_buff,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>16</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>buffer</ItemText>
-        </Ww>
-        <Ww>
-          <count>17</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>debug_data,0x0A</ItemText>
+          <ItemText>result,0x0A</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>
@@ -3198,7 +3143,7 @@
       <GroupNumber>6</GroupNumber>
       <FileNumber>48</FileNumber>
       <FileType>1</FileType>
-      <tvExp>0</tvExp>
+      <tvExp>1</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\LOAD\APP\i2c.c</PathWithFileName>
@@ -3237,8 +3182,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\LOAD\APP\honeywell_sampling_data.c</PathWithFileName>
-      <FilenameWithoutPath>honeywell_sampling_data.c</FilenameWithoutPath>
+      <PathWithFileName>.\LOAD\APP\SDP31_sampling_data.c</PathWithFileName>
+      <FilenameWithoutPath>SDP31_sampling_data.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3249,8 +3194,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\LOAD\APP\MS5525DSO_sampling_data.c</PathWithFileName>
-      <FilenameWithoutPath>MS5525DSO_sampling_data.c</FilenameWithoutPath>
+      <PathWithFileName>.\LOAD\APP\MPXV70_sampling_data.c</PathWithFileName>
+      <FilenameWithoutPath>MPXV70_sampling_data.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

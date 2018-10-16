@@ -37,7 +37,7 @@ extern BOOL rcvParameters_from_PC;
 extern KEY_STATE key_state;
 extern const uint8_t default_parameter_buf[PARAMETER_BUF_LEN];
 
-extern uint16_t RegularConvData_Tab[2];
+extern uint16_t RegularConvData_Tab[1];
 
 extern uint32_t os_ticks;
 
@@ -73,16 +73,16 @@ BOOL b_end_of_treatment=FALSE;
 
 
 BOOL DELAY_BEFORE_START_timing_flag=TRUE;
-BOOL DELAY_1000us_1_timing_flag=TRUE;
-BOOL DELAY_1000us_2_timing_flag=TRUE;
-BOOL DELAY_3000us_timing_flag=TRUE;
-uint32_t prev_DELAY_1000us_1_os_tick;
-uint32_t prev_DELAY_1000us_2_os_tick;
-uint32_t prev_DELAY_3000us_os_tick;
+//BOOL DELAY_1000us_1_timing_flag=TRUE;
+//BOOL DELAY_1000us_2_timing_flag=TRUE;
+//BOOL DELAY_3000us_timing_flag=TRUE;
+//uint32_t prev_DELAY_1000us_1_os_tick;
+//uint32_t prev_DELAY_1000us_2_os_tick;
+//uint32_t prev_DELAY_3000us_os_tick;
 
 
-BOOL HONEYWELL_DELAY_5000us_timing_flag=TRUE;
-uint32_t prev_HONEYWELL_DELAY_5000us_os_tick;
+//BOOL HONEYWELL_DELAY_5000us_timing_flag=TRUE;
+//uint32_t prev_HONEYWELL_DELAY_5000us_os_tick;
 
 
  BOOL led_bink_timing_flag=TRUE;
@@ -240,6 +240,18 @@ uint16_t wait_between_total_cnt=0;
 static BOOL* b_timing_flag;
 
  
+extern BOOL SDP31_dealy_after_reset_flag;
+extern BOOL SDP31_SEND_CMD2_flag;
+extern BOOL SDP31_READ_DATA_flag;
+extern uint32_t SDP31_prev_DELAY_20000us_os_tick;
+extern uint32_t SDP31_prev_SEND_CMD2_20000us_os_tick;
+extern uint32_t SDP31_prev_READ_DATA_1000us_os_tick;
+ 
+extern BOOL MPXV70_SAMPLE_DATA_flag;
+extern uint32_t MPXV70_prev_SAMPLE_DATA_1000us_os_tick;
+
+extern BOOL DELAY_BLE_SEND_TIMING_20ms_flag;
+extern uint32_t DELAY_prev_BLE_SEND_TIMING_20ms_os_tick;
 //*********************debug*******************
 //cycles_record，仅仅是用来测试的，正式的版本不需要这个
 #ifdef _DEBUG_TEST_CYCLES
@@ -265,6 +277,10 @@ BOOL Is_timing_X10us(uint32_t x10us,uint8_t ID)
 			b_timing_flag=&DELAY_BEFORE_START_timing_flag;
 			p_prev_os_tick=&prev_DELAY_BEFORE_START_os_tick;
 			break;
+		case DELAY_BLE_SEND_TIMING_20ms:
+			b_timing_flag=&DELAY_BLE_SEND_TIMING_20ms_flag;
+			p_prev_os_tick=&DELAY_prev_BLE_SEND_TIMING_20ms_os_tick;
+			break;
 //		case DELAY_1000us_1:
 //			b_timing_flag=&DELAY_1000us_1_timing_flag;
 //			p_prev_os_tick=&prev_DELAY_1000us_1_os_tick;
@@ -277,9 +293,24 @@ BOOL Is_timing_X10us(uint32_t x10us,uint8_t ID)
 //			b_timing_flag=&DELAY_3000us_timing_flag;
 //			p_prev_os_tick=&prev_DELAY_3000us_os_tick;
 //			break;
-		case HONEYWELL_DELAY_5000us:
-			b_timing_flag=&HONEYWELL_DELAY_5000us_timing_flag;
-			p_prev_os_tick=&prev_HONEYWELL_DELAY_5000us_os_tick;
+//		case HONEYWELL_DELAY_5000us:
+//			b_timing_flag=&HONEYWELL_DELAY_5000us_timing_flag;
+//			p_prev_os_tick=&prev_HONEYWELL_DELAY_5000us_os_tick;
+		case DELAY_SDP31_DELAY_AFTER_RESET:
+			b_timing_flag=&SDP31_dealy_after_reset_flag;
+			p_prev_os_tick=&SDP31_prev_DELAY_20000us_os_tick;
+			break;
+		case DELAY_SDP31_SEND_CMD2:
+			b_timing_flag=&SDP31_SEND_CMD2_flag;
+			p_prev_os_tick=&SDP31_prev_SEND_CMD2_20000us_os_tick;
+			break;
+		case DELAY_SDP31_READ_DATA:
+			b_timing_flag=&SDP31_READ_DATA_flag;
+			p_prev_os_tick=&SDP31_prev_READ_DATA_1000us_os_tick;
+			break;
+		case DELAY_MPXV70_SAMPLE_DATA:
+			b_timing_flag=&MPXV70_SAMPLE_DATA_flag;
+			p_prev_os_tick=&MPXV70_prev_SAMPLE_DATA_1000us_os_tick;
 		default:
 			break;
 	}

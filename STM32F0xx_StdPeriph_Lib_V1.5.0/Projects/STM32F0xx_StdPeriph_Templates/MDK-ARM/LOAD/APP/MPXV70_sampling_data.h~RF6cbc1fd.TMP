@@ -1,0 +1,10 @@
+#ifndef _MPXV70_SAMPLING_DATA_H
+#define _MPXV70_SAMPLING_DATA_H
+
+#define SDP31_SAMPLING_DATA_PERIOD 10
+
+
+void MPXV70_sampling_data(void);
+
+#endif //_MPXV70_SAMPLING_DATA_H
+

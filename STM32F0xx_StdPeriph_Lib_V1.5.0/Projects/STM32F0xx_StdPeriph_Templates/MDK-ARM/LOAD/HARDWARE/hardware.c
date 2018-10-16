@@ -31,6 +31,7 @@
 #include "protocol_module.h"
 #include "key_power_on_task.h"
 #include "app.h"
+#include "SDP31_sampling_data.h"
 /**********************************
 *ºê¶¨Òå
 ***********************************/
@@ -39,7 +40,7 @@
 * È«¾Ö±äÁ¿
 ***********************************/
 unsigned short inner_adc_result[SAMPLING_CNT];
- uint16_t RegularConvData_Tab[2]; //µçÑ¹Öµ(2.2VÎªÁÙ½çÖµ),°´¼üÄ£Ê½
+ uint16_t RegularConvData_Tab[1]; //ADC1Öµ£¬PressureSen
 
 int16_t zero_point_of_pressure_sensor;
 extern uint8_t parameter_buf[PARAMETER_BUF_LEN];
@@ -278,28 +279,28 @@ void Init_SWITCH_ON_OFF()
 
 
 
-//Ð£Ñépressure sensor
-void Calibrate_pressure_sensor(int16_t* p_zeroPoint)
-{
-	//Èç¹ûÊÇ¸ºÑ¹ÔõÃ´°ì£¿Ó¦¸Ã¶¨Òå³Éint16?Öµ»á²»»á±ä³É¸ºÊý£¿
-	uint16_t arr[10]={0};
-	uint16_t sum=0;
-	delay_ms(50);
-//	GPIO_SetBits(GPIOB,GPIO_Pin_10);
-//	GPIO_SetBits(GPIOB,GPIO_Pin_11);
+////Ð£Ñépressure sensor
+//void Calibrate_pressure_sensor(int16_t* p_zeroPoint)
+//{
+//	//Èç¹ûÊÇ¸ºÑ¹ÔõÃ´°ì£¿Ó¦¸Ã¶¨Òå³Éint16?Öµ»á²»»á±ä³É¸ºÊý£¿
+//	uint16_t arr[10]={0};
+//	uint16_t sum=0;
+//	delay_ms(50);
+////	GPIO_SetBits(GPIOB,GPIO_Pin_10);
+////	GPIO_SetBits(GPIOB,GPIO_Pin_11);
+////	
+////	delay_ms(2000); 
+////	GPIO_SetBits(GPIOB,GPIO_Pin_11);
+////	GPIO_SetBits(GPIOB,GPIO_Pin_12);
 //	
-//	delay_ms(2000); 
-//	GPIO_SetBits(GPIOB,GPIO_Pin_11);
-//	GPIO_SetBits(GPIOB,GPIO_Pin_12);
-	
-	for(uint8_t i=0;i<10;i++)
-	{
-		arr[i]=ADS115_readByte(0x90);
-		sum+=arr[i];
-		delay_us(5);
-	}
-	*p_zeroPoint=sum/10;
-}
+//	for(uint8_t i=0;i<10;i++)
+//	{
+//		arr[i]=ADS115_readByte(0x90);
+//		sum+=arr[i];
+//		delay_us(5);
+//	}
+//	*p_zeroPoint=sum/10;
+//}
 
 void Init_USB_OE()                    //PA0
 {		
@@ -312,16 +313,17 @@ void Init_USB_OE()                    //PA0
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
 
-void Init_Blue_WIFI_ONOFF()  //PC13
+void Init_Blue_WIFI_ONOFF()  //PA8
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
-	GPIO_ResetBits(GPIOC,GPIO_Pin_13);  
+	GPIO_ResetBits(GPIOA,GPIO_Pin_8);  
+//	GPIO_SetBits(GPIOA,GPIO_Pin_8); 
 }
 
 void Init_Blue_EN()        //PB15
@@ -371,16 +373,29 @@ void Init_CHARGE_IO()    //PA2
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
 
-void Init_SENSOR_ONOFF()    //PB7
+void Init_SENSOR_ONOFF()    //PB6
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	GPIO_ResetBits(GPIOB,GPIO_Pin_7); 
+	GPIO_ResetBits(GPIOB,GPIO_Pin_6); 
+}
+
+
+void Init_SDP31_IRQn()    //PB5
+{
+	GPIO_InitTypeDef  GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_SetBits(GPIOB,GPIO_Pin_5); 
 }
 
 void Init_WIFI_RST()      //PB1
@@ -426,7 +441,7 @@ void init_hardware()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB |RCC_AHBPeriph_GPIOC, ENABLE);//
 	//delay_ms(1);
-	//³õÊ¼»¯LEDµÆ                            //PB12,PB9
+	//³õÊ¼»¯LEDµÆ                            //PB8,PB9
 	Init_LED();
 	
 ////	//³õÊ¼»¯USB_OE£¬ÕâÀïÊÇ5V0_AD
@@ -442,7 +457,7 @@ void init_hardware()
 //	Init_WIFI_RST();
 
 	//³õÊ¼»¯Bluetooth&WIFI ON/PFF
-	Init_Blue_WIFI_ONOFF();  									//PC13  
+	Init_Blue_WIFI_ONOFF();  									//PA8
 
 //	//³õÊ¼»¯WIFI´®¿ÚRX,TX                     //PB10,PB11
 //	Init_UART_WIFI(UART_BAUDRATE);
@@ -450,7 +465,7 @@ void init_hardware()
 //	//³õÊ¼»¯BLUE_EN
 //	Init_Blue_EN();														//PB15
 	
-	//³õÊ¼»¯À¶ÑÀ´®¿ÚRX,TX                     //PA9,PA10   Õâ¸ö³õÊ¼»¯ÓÐÎÊÌâ£¬Ò»¿ªÕâ¸ö¾Í°´¼ü¿ª²»ÁË»ú
+	//³õÊ¼»¯À¶ÑÀ´®¿ÚRX,TX                     //PA9,PA10 
 	Init_UART_BLUETOOTH(UART_BAUDRATE);
 	
 //	//À¶ÑÀ·¢ËÍÄ£Ê½PA8ÖÃ1£¬PB14ÖÃ0
@@ -465,11 +480,18 @@ void init_hardware()
 //	//³õÊ¼»¯CHARGE_IO                         //PA2
 //	Init_CHARGE_IO();
 
-	//³õÊ¼»¯sensor_on/off 										//PB7
+	Init_SDP31_IRQn();   												//PB5
+
+	//³õÊ¼»¯sensor_on/off 										//PB6
 	Init_SENSOR_ONOFF();		
 
+	//³õÊ¼»¯ADC1µÄÊý¾Ý²É¼¯
+	Init_ADC1();
+	
 //	//³õÊ¼»¯ADC_MP  ,honneywell´«¸ÐÆ÷
 //	Init_I2C_MP();
+
+//	SDP31_I2C_Configuration();
 		
 	//³õÊ¼»¯ADC_Flow                         //´ýÍê³É
 //	Init_ADC_Flow();
@@ -760,34 +782,33 @@ void Init_ADC1(void)
 	ADC_InitTypeDef     ADC_InitStructure;
 
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);  //ÐÂÔö
+//	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);  //ÐÂÔö
 	
-	//GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_4;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;    //PA1
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
   GPIO_Init(GPIOA, &GPIO_InitStructure);	
 		
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;    //PB0
-	GPIO_Init(GPIOB, &GPIO_InitStructure);	
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;    //PB0
+//	GPIO_Init(GPIOB, &GPIO_InitStructure);	
 	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1 , ENABLE);		
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1 , ENABLE);
 	
-	ADC_DeInit(ADC1);//ADC???'??è?éè??		
-
-  DMA_DeInit(DMA1_Channel1);	/* DMA1 Channel1 Config */
-  DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC1_DR_Address;//íaéèµ??·
-  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)RegularConvData_Tab;//?ú'?µ??·
-  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;//íaéè×÷?aêy?Y'?ê?µ?à'?'
-  DMA_InitStructure.DMA_BufferSize = 2;//
-  DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;//íaéèµ??·??'??÷2?±?
-  DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;//?ú'?µ??·??'??÷2?±?
-  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;//êy?Y?í?è?a16??
-  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;//êy?Y?í?è?a16??
-  DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
-  DMA_InitStructure.DMA_Priority = DMA_Priority_High;//DMA_Priorityéè?¨DMAí¨µàxµ?èí?tó??è??
-  DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;//DMAí¨µàx??óDéè???a?ú'?µ??ú'?'?ê?
+	ADC_DeInit(ADC1);//	¸´Î»ADC1
+	
+  DMA_DeInit(DMA1_Channel1);	//¸´Î»ADC1 chanel1
+  DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC1_DR_Address;  				//È¡ÖµµÄÍâÉèµØÖ·
+  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)RegularConvData_Tab;					//»º´æÊý×éÆðÊ¼µØÖ·
+  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;														//DMA·½Ïò£ºÍâÉè×÷ÎªÊý¾ÝÔ´
+  DMA_InitStructure.DMA_BufferSize = 1;																					//DMA»º´æÊý×é´óÐ¡ÉèÖÃ
+  DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;							//ÍâÉèµØÖ·µÝÔö½ûÓÃ
+  DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;												//ÄÚ´æµØÖ·µÝÔö
+  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;		//ÍâÉèÈ¡Öµ´óÐ¡ÉèÖÃÎªhalfword
+  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;						//Êý¾Ý´óÐ¡ÉèÖÃÎªhalfword
+  DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;																//DMAÑ­»·Ä£Ê½£¬¼´Íê³ÉºóÖØÐÂ¸²¸Ç
+  DMA_InitStructure.DMA_Priority = DMA_Priority_High;														//DMAÉèÖÃ¸ßÓÅÏÈ¼¶
+  DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;																	//ÄÚ´æµ½ÄÚ´æ½ûÓÃ
   DMA_Init(DMA1_Channel1, &DMA_InitStructure);
 		  
 	DMA_Cmd(DMA1_Channel1, ENABLE);/* DMA1 Channel1 enable */			
@@ -795,7 +816,7 @@ void Init_ADC1(void)
   ADC_DMACmd(ADC1, ENABLE);  
 	
 		
-	ADC_StructInit(&ADC_InitStructure);//3?ê??¯ADC?á11
+	ADC_StructInit(&ADC_InitStructure);
 	
 	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;//12?????è
   ADC_InitStructure.ADC_ContinuousConvMode = ENABLE; //1??¨??ê?×°??1¤×÷?úá?D???ê?
@@ -805,17 +826,7 @@ void Init_ADC1(void)
   ADC_Init(ADC1, &ADC_InitStructure); 
 	
   ADC_ChannelConfig(ADC1, ADC_Channel_1 , ADC_SampleTime_239_5Cycles); /* Convert the ADC1 Channel 11 with 239.5 Cycles as sampling time */  
-//  ADC_ChannelConfig(ADC1, ADC_Channel_4 , ADC_SampleTime_239_5Cycles); /* Convert the ADC1 Channel 11 with 239.5 Cycles as sampling time */  
-	ADC_ChannelConfig(ADC1, ADC_Channel_8 , ADC_SampleTime_239_5Cycles);
-
-//  ADC_ChannelConfig(ADC1, ADC_Channel_Vrefint ,ADC_SampleTime_239_5Cycles); 
-//  ADC_VrefintCmd(ENABLE);
-//	
-//	ADC_ChannelConfig(ADC1, ADC_Channel_TempSensor ,ADC_SampleTime_239_5Cycles);
-//	ADC_TempSensorCmd(ENABLE);
-//	
-//	ADC_ChannelConfig(ADC1, ADC_Channel_Vbat ,ADC_SampleTime_239_5Cycles);
-//	ADC_VbatCmd(ENABLE);
+//	ADC_ChannelConfig(ADC1, ADC_Channel_8 , ADC_SampleTime_239_5Cycles);
 	
 	ADC_GetCalibrationFactor(ADC1); /* ADC Calibration */  
   ADC_Cmd(ADC1, ENABLE);  /* Enable ADCperipheral[PerIdx] */	  

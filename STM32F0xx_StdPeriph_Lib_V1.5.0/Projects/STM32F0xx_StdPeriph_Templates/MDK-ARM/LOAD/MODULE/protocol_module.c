@@ -48,7 +48,7 @@ extern UINT16 check_sum;
 //当接收到上位机发送数据命令时，该变量置为TRUE,发送完毕置为FALSE
 //extern uint8_t send_exp_train_data_status;s
 extern MCU_STATE mcu_state;
-extern uint16_t RegularConvData_Tab[2];
+extern uint16_t RegularConvData_Tab[1];
 
 
 uint8_t arr_mmgH_value[3];
@@ -605,28 +605,28 @@ void send_cal_reslut_2_PC()
 	FlashWrite(FLASH_PRESSURE_RATE_ADDR,(uint8_t*)&rate,1);
 }
 
-void calibrate_sensor_by_ID(uint8_t* pdata,uint8_t ID)
-{
-	switch(ID)
-	{
-		case 1:
-			arr_mmgH_value[0]=*(pdata+4);
-			arr_adc_value[0]=ADS115_readByte(0x90);
-			break;
-		case 2:
-			arr_mmgH_value[1]=*(pdata+4);
-			arr_adc_value[1]=ADS115_readByte(0x90);
-			break;
-		case 3:
-			arr_mmgH_value[2]=*(pdata+4);
-			arr_adc_value[2]=ADS115_readByte(0x90);
-			
-			send_cal_reslut_2_PC();
-			break;
-		default:
-			break;
-	}
-}
+//void calibrate_sensor_by_ID(uint8_t* pdata,uint8_t ID)
+//{
+//	switch(ID)
+//	{
+//		case 1:
+//			arr_mmgH_value[0]=*(pdata+4);
+//			arr_adc_value[0]=ADS115_readByte(0x90);
+//			break;
+//		case 2:
+//			arr_mmgH_value[1]=*(pdata+4);
+//			arr_adc_value[1]=ADS115_readByte(0x90);
+//			break;
+//		case 3:
+//			arr_mmgH_value[2]=*(pdata+4);
+//			arr_adc_value[2]=ADS115_readByte(0x90);
+//			
+//			send_cal_reslut_2_PC();
+//			break;
+//		default:
+//			break;
+//	}
+//}
 
 //解析上位机命令
 void protocol_module_process(uint8_t* pdata)
@@ -715,15 +715,15 @@ void protocol_module_process(uint8_t* pdata)
 		send_prameter_fram3_to_PC();
 		break;
 	
-	case CAL_SENSOR_MMGH_1:   //新增的专门用来校验sensor
-		calibrate_sensor_by_ID(pdata,1);
-		break;
-	case CAL_SENSOR_MMGH_2:
-		calibrate_sensor_by_ID(pdata,2);
-		break;
-	case CAL_SENSOR_MMGH_3:
-		calibrate_sensor_by_ID(pdata,3);  //在3中回传值
-		break;
+//	case CAL_SENSOR_MMGH_1:   //新增的专门用来校验sensor
+//		calibrate_sensor_by_ID(pdata,1);
+//		break;
+//	case CAL_SENSOR_MMGH_2:
+//		calibrate_sensor_by_ID(pdata,2);
+//		break;
+//	case CAL_SENSOR_MMGH_3:
+//		calibrate_sensor_by_ID(pdata,3);  //在3中回传值
+//		break;
 	
 	default:
 		break;

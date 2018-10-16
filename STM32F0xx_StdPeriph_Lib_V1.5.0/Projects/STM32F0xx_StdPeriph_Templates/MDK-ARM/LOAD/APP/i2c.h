@@ -2,8 +2,26 @@
 #define _I2C_H
 
 #include "common.h"
+#include <stm32f0xx.h>
 
+//定义sensirion SDP31传感器(压差传感器)
+#define SDP31_IO_PORT		GPIOB
+#define SDP31_I2C_SCL   	GPIO_Pin_4
+#define SDP31_I2C_SDA		GPIO_Pin_3
+#define SDP31_OFFSET								3         //根据SDA的引脚值
 
+#define SCL_L          		      SDP31_IO_PORT->BRR  = SDP31_I2C_SCL
+#define SCL_H          		      SDP31_IO_PORT->BSRR = SDP31_I2C_SCL
+#define SDA_L          		      SDP31_IO_PORT->BRR  = SDP31_I2C_SDA
+#define SDA_H          		      SDP31_IO_PORT->BSRR = SDP31_I2C_SDA
+#define SDA_READ                (SDP31_IO_PORT->IDR &  SDP31_I2C_SDA) >> SDP31_OFFSET
+
+int16_t SDP31_read_data(void);
+void SDP31_reset(void);
+void SDP31_send_read_cmd_15_8(void);
+void SDP31_send_read_cmd_7_0(void); 
+
+#if 0
 //定义honewell传感器(采集压力值)
 #define HONNEYWELL_IO_PORT		GPIOB
 #define HONNEYWELL_I2C_SCL   	GPIO_Pin_4
@@ -76,9 +94,14 @@ extern INT32S MS5525DSO_readByte(void);
 extern void ADS115_enter_power_down_mode(void);
 extern void Init_honeywell_sensor(void);
 extern void ADS115_writeByte(INT8U slaveaddr,INT8U data);
-extern INT16U ADS115_readByte(INT8U slaveaddr);
+//extern INT16U ADS115_readByte(INT8U slaveaddr);
 void ADS115_enter_power_down_mode(void);
 extern INT32U honeywell_readByte(void);
 extern INT8U Honeywell_ready_for_read(void);
+#endif
+
+
+
+
 #endif
 

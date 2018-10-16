@@ -1,0 +1,24 @@
+#ifndef _SENSIRION_SAMPLING_DATA_H
+#define _SENSIRION_SAMPLING_DATA_H
+
+#define SDP31_SAMPLING_DATA_PERIOD 10
+
+#define SDP31_SAMPLE_CNT 4
+
+typedef enum
+{
+	SDP31_NONE,
+	SDP31_CONFIG_IO,
+	SDP31_RESET,
+	SDP31_SEND_READ_CMD,
+	SDP31_READ_DATA,
+	SDP31_SAMPLE_FINISH
+}SDP31_STATE;
+
+void SDP31_I2C_Configuration(void);
+void SDP31_send_read_cmd(void);
+void SDP31_sampling_data(void);
+
+
+#endif //_SENSIRION_SAMPLING_DATA_H
+

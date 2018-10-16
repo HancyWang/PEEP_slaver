@@ -2,7 +2,202 @@
 #include "stm32f0xx_conf.h"
 
 #include "i2c.h"
+#include "delay.h"
 
+void I2C_SDA_IN(void)
+{
+	GPIO_InitTypeDef   GPIO_uInitStructure;
+	
+	GPIO_uInitStructure.GPIO_Pin = SDP31_I2C_SDA;
+	GPIO_uInitStructure.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_uInitStructure.GPIO_OType = GPIO_OType_OD;  
+	GPIO_uInitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_uInitStructure.GPIO_Speed = GPIO_Speed_Level_3;  // 10M
+	GPIO_Init(SDP31_IO_PORT,&GPIO_uInitStructure);
+}
+
+void I2C_SDA_OUT(void)
+{
+	GPIO_InitTypeDef   GPIO_uInitStructure;
+	
+	GPIO_uInitStructure.GPIO_Pin = SDP31_I2C_SDA;
+	GPIO_uInitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_uInitStructure.GPIO_OType = GPIO_OType_OD;  
+	GPIO_uInitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_uInitStructure.GPIO_Speed = GPIO_Speed_Level_3;  // 10M
+	GPIO_Init(SDP31_IO_PORT,&GPIO_uInitStructure);
+}
+
+void I2C_Start(void)
+{
+	I2C_SDA_OUT();
+	
+	SDA_H;
+	SCL_H;
+	Delay_us(5);
+	SDA_L;
+	Delay_us(5);
+	SCL_L;
+}
+
+void I2C_Stop(void)
+{
+	//I2C_SDA_OUT();
+	
+  SDA_L;
+  SCL_H;
+  Delay_us(5);
+  SDA_H;
+  Delay_us(5);
+}
+
+void I2C_SendAck(void)
+{
+  I2C_SDA_OUT();
+	
+  SDA_L;
+  SCL_H;
+  Delay_us(5);
+  SCL_L;
+  Delay_us(5);
+}
+void I2C_SendNak(void)
+{
+  I2C_SDA_OUT();
+	
+  SDA_H;
+	//SDA_L;
+  SCL_H;
+  Delay_us(5);
+  SCL_L;
+  Delay_us(5);
+}
+
+
+INT8U I2C_RecAck(void)
+{
+  INT8U RecAck=0;
+	
+  //I2C_SDA_IN();
+	SDA_H;
+	Delay_us(5);
+  SCL_H;
+  Delay_us(5);
+	I2C_SDA_IN();
+	Delay_us(20);
+  RecAck = (INT8U)SDA_READ;
+	I2C_SDA_OUT();
+	Delay_us(5);
+  SCL_L;
+  Delay_us(25);
+	
+  return RecAck;
+}
+
+INT8U I2C_RecByte(void)
+{
+  INT8U i,dat=0;
+
+  I2C_SDA_IN();
+	
+  for(i=0;i<8;i++)
+  {
+    SCL_H;
+    Delay_us(5);
+    dat <<=1;
+    dat |= SDA_READ;
+    SCL_L;
+    Delay_us(5);
+  }
+  return dat;
+}
+
+void I2C_SendByte(INT8U dat)
+{
+  INT8U i;
+  //I2C_SDA_OUT();
+  for(i=0;i<8;i++)
+  {
+    if(dat&0x80)
+		{
+      SDA_H;
+		}
+    else
+		{
+      SDA_L;
+		}
+    dat <<=1;
+		Delay_us(5);
+    SCL_H;
+    Delay_us(5);
+    SCL_L;
+    Delay_us(5);
+  }
+}
+
+
+void SDP31_I2C_Configuration(void)   //配置SDP31的I2C端口
+{
+	GPIO_InitTypeDef   GPIO_uInitStructure;
+	
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB,ENABLE);
+	
+	GPIO_uInitStructure.GPIO_Pin = SDP31_I2C_SCL | SDP31_I2C_SDA;
+	GPIO_uInitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_uInitStructure.GPIO_OType = GPIO_OType_OD;  
+	GPIO_uInitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_uInitStructure.GPIO_Speed = GPIO_Speed_Level_3;  
+	GPIO_Init(SDP31_IO_PORT,&GPIO_uInitStructure);	
+}
+
+void SDP31_reset()
+{
+	I2C_Start();
+  I2C_SendByte(0x00);
+	I2C_RecAck();
+	I2C_SendByte(0x06);
+	I2C_RecAck();
+	I2C_Stop();
+}
+
+void SDP31_send_read_cmd_15_8()  //连续模式
+{
+  I2C_Start();
+  I2C_SendByte(0x42);  //0x21+W(0)   0100 0010
+	I2C_RecAck();
+  I2C_SendByte(0x36);  //CMD 15:8
+//	I2C_SendByte(0x37);
+	I2C_RecAck();
+}
+
+void SDP31_send_read_cmd_7_0()
+{
+	I2C_SendByte(0x1E);  //CMD 7:0		
+	I2C_RecAck();
+	//	I2C_Stop();
+}
+
+int16_t SDP31_read_data()
+{
+	INT8U data15_8,data7_0,CRC1_7_0;
+
+	I2C_Start();
+	I2C_SendByte(0x43);  //0x21+R(1)   0100 0011
+	I2C_RecAck();
+	data15_8=I2C_RecByte();
+	I2C_SendAck();
+	data7_0=I2C_RecByte();
+	I2C_SendAck();
+	CRC1_7_0=I2C_RecByte();
+	I2C_SendNak();
+	I2C_Stop();
+//	return (data15_8<<16)+(data7_0<<8)+CRC1_7_0;
+	return (data15_8<<8)+data7_0;
+}
+
+
+//换sensor了,以下的I2C不用了
+#if 0
 //honeywell传感器
 void I2C_uConfiguration(void)
 {
@@ -10,7 +205,7 @@ void I2C_uConfiguration(void)
 	
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB,ENABLE);
 	
-	GPIO_uInitStructure.GPIO_Pin = HONNEYWELL_I2C_SCL | HONNEYWELL_I2C_SCL;
+	GPIO_uInitStructure.GPIO_Pin = HONNEYWELL_I2C_SCL | HONNEYWELL_I2C_SDA;
 	GPIO_uInitStructure.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_uInitStructure.GPIO_OType = GPIO_OType_OD;  
 	GPIO_uInitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
@@ -505,4 +700,4 @@ INT16U ADS115_readByte(INT8U slaveaddr)
 	I2C_Stop();
 	return data1*256+data2;
 }
-
+#endif

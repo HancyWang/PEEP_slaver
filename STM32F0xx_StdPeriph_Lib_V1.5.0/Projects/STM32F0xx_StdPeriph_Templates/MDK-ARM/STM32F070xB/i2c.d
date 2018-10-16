@@ -32,3 +32,4 @@ stm32f070xb\i2c.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_w
 stm32f070xb\i2c.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h
 stm32f070xb\i2c.o: LOAD\APP\i2c.h
 stm32f070xb\i2c.o: LOAD\APP\common.h
+stm32f070xb\i2c.o: .\LOAD\SYSTEM\delay.h

@@ -1,0 +1,17 @@
+#ifndef _SENSIRION_SAMPLING_DATA_H
+#define _SENSIRION_SAMPLING_DATA_H
+
+#define SDP31_SAMPLING_DATA_PERIOD 200
+
+//typedef enum
+//{
+//	SDP31_NONE,
+//	SDP31_INIT,
+//	SDP31_RE
+//}SDP31_STATE;
+
+
+void SDP31_sampling_data(void);
+
+#endif //_SENSIRION_SAMPLING_DATA_H
+

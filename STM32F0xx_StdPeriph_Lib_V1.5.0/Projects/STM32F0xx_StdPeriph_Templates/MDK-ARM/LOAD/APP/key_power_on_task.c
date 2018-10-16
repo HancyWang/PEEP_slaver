@@ -172,7 +172,7 @@ BOOL b_Is_PCB_PowerOn=FALSE;
 KEY_STATE key_state=KEY_UPING;
 //KEY_STATE key_state=KEY_DOWNING;
 
-extern uint16_t RegularConvData_Tab[2];
+extern uint16_t RegularConvData_Tab[1];
 /***********************************
 * 局部函数
 ***********************************/
@@ -724,7 +724,6 @@ void test(void)
 ** 全局变量: 无
 ** 调用模块: 无
 *******************************************************************************/
-
 void key_power_on_task(void)
 {
 	static uint8_t wakeup_Cnt;

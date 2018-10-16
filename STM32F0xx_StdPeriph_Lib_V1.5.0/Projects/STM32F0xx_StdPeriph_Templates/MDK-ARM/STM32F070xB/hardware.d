@@ -44,3 +44,4 @@ stm32f070xb\hardware.o: .\LOAD\APP\comm_task.h
 stm32f070xb\hardware.o: .\LOAD\MODULE\protocol_module.h
 stm32f070xb\hardware.o: .\LOAD\APP\key_power_on_task.h
 stm32f070xb\hardware.o: .\LOAD\APP\app.h
+stm32f070xb\hardware.o: .\LOAD\APP\SDP31_sampling_data.h

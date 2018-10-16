@@ -20,10 +20,9 @@
 /**********************************
 *宏定义
 ***********************************/
-//PEEP, 绿灯-PB12,红灯-PB9
 #define LED_PORT GPIOB   //所有的LED灯都是GPIOB
 #define LED_GREEN_PWR_PIN  GPIO_Pin_9   //PB9 ,LED1,绿灯
-#define LED_YELLOW_PWR_PIN GPIO_Pin_12 //PB12,LED2,黄灯
+#define LED_YELLOW_PWR_PIN GPIO_Pin_8 //PB8,LED2,黄灯
 
 #define LED_MODE1_PIN      GPIO_Pin_6   //MODE1,PB6
 //#define LED_MODE2_PIN			 GPIO_Pin_4   //MODE2,PB4

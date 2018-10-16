@@ -31,8 +31,10 @@
 #include "send_data_to_phone.h"
 #include "i2c.h"
 #include "delay.h"
-#include "honeywell_sampling_data.h"
-#include "MS5525DSO_sampling_data.h"
+//#include "honeywell_sampling_data.h"
+//#include "MS5525DSO_sampling_data.h"
+#include "SDP31_sampling_data.h"
+#include "MPXV70_sampling_data.h"
 
 //#include <stdint.h>
 //#include <math.h>
@@ -93,8 +95,12 @@ void init_task(void)
 	//os_create_task(test, OS_TRUE, TASK_TEST_ID);
 	//os_create_task(test_task,OS_TRUE,TASK_TEST_ID);
 	//os_create_task(key_power_on_task, OS_TRUE, KEY_LED_TASK_ID);
-	os_create_task(honeywell_sampling_data, OS_TRUE, HONEYWELL_SAMPLING_DATA_TASK_ID);
-	os_create_task(MS5525DSO_sampling_data, OS_TRUE, MS5525DSO_SAMPLING_DATA_TASK_ID);
+//	//这两个sensor不用了，换成sensirion和MPXV70
+//	os_create_task(honeywell_sampling_data, OS_TRUE, HONEYWELL_SAMPLING_DATA_TASK_ID);
+//	os_create_task(MS5525DSO_sampling_data, OS_TRUE, MS5525DSO_SAMPLING_DATA_TASK_ID);
+	os_create_task(SDP31_sampling_data, OS_TRUE, SDP31_SAMPLING_DATA_TASK_ID);
+	os_create_task(MPXV70_sampling_data, OS_TRUE, MPXV70_SAMPLING_DATA_TASK_ID);
+	
 	os_create_task(send_data_to_phone_task, OS_TRUE, KEY_SEND_DATA_TO_PHONE_TASK_ID);
 	
 	//os_create_task(get_switch_mode,OS_TRUE,TASK_GET_SWITCH_MODE);
@@ -106,17 +112,17 @@ void init_task(void)
 	//os_create_task(usb_charge_battery,OS_TRUE,TASK_USB_CHARGE_BAT);
 	//os_create_task(self_test,OS_TRUE,TASK_SELF_TEST);
 
-	
 	os_pend_task(INIT_TASK_ID);
 }
 
 //测试任务，专门用来调试代码
 extern uint32_t os_ticks;
-static uint32_t debug_prev_os_tick;
-static uint32_t debug_after_os_tick;
+//static uint32_t debug_prev_os_tick;
+//static uint32_t debug_after_os_tick;
 void test_task(void)
 {
 	//测试honeywell sensor
+	#if 0
 	static unsigned int data,d1,d2;
 	static UINT16 c1,c2,c3,c4,c5,c6;  //6个PROM的值
 	Init_honeywell_sensor();
@@ -169,6 +175,7 @@ void test_task(void)
 //		USART_WIFI_SendBuf(&data,1);
 //		Delay_ms(100);
 //	}
+	#endif
 	
 	os_delay_100us(TEST_TASK_ID, 50);
 	//os_delay_ms(TEST_TASK_ID, 50);
