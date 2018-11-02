@@ -412,11 +412,13 @@ ARM Macro Assembler    Page 7
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0 --apcs=interw
 ork --depend=stm32f070xb\startup_stm32f070xb.d -ostm32f070xb\startup_stm32f070x
-b.o -I.\RTE\_STM32F070xB -ID:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0\Device\
-Include -ID:\Keil_v5\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" --predef
-ine="__UVISION_VERSION SETA 523" --predefine="STM32F070xB SETA 1" --list=.\stm3
-2f070xb\startup_stm32f070xb.lst ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\So
-urce\Templates\arm\startup_stm32f070xb.s
+b.o -I.\RTE\_STM32F070xB -I"D:\Program Files (x86)\Keil_v5\ARM\PACK\Keil\STM32F
+0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include" -I"D:\Program Files (x
+86)\Keil_v5\ARM\CMSIS\Include" -I"D:\Program Files (x86)\Keil_v5\ARM\PACK\Keil\
+STM32F0xx_DFP\2.0.0\Device\Include" --predefine="__MICROLIB SETA 1" --predefine
+="__UVISION_VERSION SETA 525" --predefine="STM32F070xB SETA 1" --list=.\stm32f0
+70xb\startup_stm32f070xb.lst ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Sourc
+e\Templates\arm\startup_stm32f070xb.s
 
 
 

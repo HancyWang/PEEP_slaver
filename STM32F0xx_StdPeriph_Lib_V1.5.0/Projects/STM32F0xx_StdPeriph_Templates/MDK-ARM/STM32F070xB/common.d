@@ -3,7 +3,7 @@ stm32f070xb\common.o: ..\stm32f0xx_conf.h
 stm32f070xb\common.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_adc.h
 stm32f070xb\common.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
 stm32f070xb\common.o: ..\..\..\Libraries\CMSIS\Include\core_cm0.h
-stm32f070xb\common.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f070xb\common.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32f070xb\common.o: ..\..\..\Libraries\CMSIS\Include\core_cmInstr.h
 stm32f070xb\common.o: ..\..\..\Libraries\CMSIS\Include\core_cmFunc.h
 stm32f070xb\common.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h

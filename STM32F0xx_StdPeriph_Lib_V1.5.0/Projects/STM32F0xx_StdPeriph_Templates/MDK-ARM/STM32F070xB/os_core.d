@@ -2,7 +2,7 @@ stm32f070xb\os_core.o: LOAD\OS\os_core.c
 stm32f070xb\os_core.o: LOAD\OS\os_core.h
 stm32f070xb\os_core.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
 stm32f070xb\os_core.o: ..\..\..\Libraries\CMSIS\Include\core_cm0.h
-stm32f070xb\os_core.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f070xb\os_core.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32f070xb\os_core.o: ..\..\..\Libraries\CMSIS\Include\core_cmInstr.h
 stm32f070xb\os_core.o: ..\..\..\Libraries\CMSIS\Include\core_cmFunc.h
 stm32f070xb\os_core.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h

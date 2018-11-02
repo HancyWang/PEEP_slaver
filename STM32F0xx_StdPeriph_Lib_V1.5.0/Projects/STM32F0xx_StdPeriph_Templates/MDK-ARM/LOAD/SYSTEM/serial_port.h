@@ -26,7 +26,7 @@
 #define UART_DMA_RX_CHANNEL   DMA1_Channel3
 #define UART_DMA_TX_CHANNEL   DMA1_Channel2
 #else
-#define UART    USART2          //目前使用的是这个芯片，STM32F070CB              
+#define UART    USART2                  
 #define UART_CLKSRC RCC_APB1Periph_USART2
 #define UART_DMA_RX_CHANNEL   DMA1_Channel5
 #define UART_DMA_TX_CHANNEL   DMA1_Channel4

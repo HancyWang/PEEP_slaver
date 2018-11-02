@@ -79,7 +79,7 @@ void init_task(void)
 	init_hardware();	
 	//Motor_PWM_Init();
 
-	
+#if 0
 //#ifdef _DEBUG
 //	Calibrate_pressure_sensor(&zero_point_of_pressure_sensor);
 //#endif
@@ -94,10 +94,11 @@ void init_task(void)
 
 	//os_create_task(test, OS_TRUE, TASK_TEST_ID);
 	//os_create_task(test_task,OS_TRUE,TASK_TEST_ID);
-	//os_create_task(key_power_on_task, OS_TRUE, KEY_LED_TASK_ID);
 //	//这两个sensor不用了，换成sensirion和MPXV70
 //	os_create_task(honeywell_sampling_data, OS_TRUE, HONEYWELL_SAMPLING_DATA_TASK_ID);
 //	os_create_task(MS5525DSO_sampling_data, OS_TRUE, MS5525DSO_SAMPLING_DATA_TASK_ID);
+#endif
+	os_create_task(key_power_on_task, OS_TRUE, KEY_LED_TASK_ID);
 	os_create_task(SDP31_sampling_data, OS_TRUE, SDP31_SAMPLING_DATA_TASK_ID);
 	os_create_task(MPXV70_sampling_data, OS_TRUE, MPXV70_SAMPLING_DATA_TASK_ID);
 	

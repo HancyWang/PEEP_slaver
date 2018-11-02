@@ -10,6 +10,7 @@
 #include <math.h>
 #include "SDP31_sampling_data.h"
 #include "MPXV70_sampling_data.h"
+#include "app.h"
 
 BOOL DELAY_BLE_SEND_TIMING_20ms_flag=TRUE;
 uint32_t DELAY_prev_BLE_SEND_TIMING_20ms_os_tick;
@@ -115,7 +116,10 @@ void fill_buffer_send(uint8_t* p_buffer)
 
 void send_data_to_phone_task()
 {
-	//if(mcu_state==POWER_ON)
+	#ifdef _DEBUG
+	#else
+	if(mcu_state==POWER_ON)
+	#endif
 	{
 		//1.准备
 		if(send_state==SEND_PRE)  //延迟210ms,让蓝牙准备好

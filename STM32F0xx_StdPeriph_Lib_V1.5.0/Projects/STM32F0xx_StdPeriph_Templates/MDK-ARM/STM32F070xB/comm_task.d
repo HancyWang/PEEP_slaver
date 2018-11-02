@@ -7,7 +7,7 @@ stm32f070xb\comm_task.o: .\LOAD\OS\os_cfg.h
 stm32f070xb\comm_task.o: .\LOAD\OS\os_core.h
 stm32f070xb\comm_task.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
 stm32f070xb\comm_task.o: ..\..\..\Libraries\CMSIS\Include\core_cm0.h
-stm32f070xb\comm_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f070xb\comm_task.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32f070xb\comm_task.o: ..\..\..\Libraries\CMSIS\Include\core_cmInstr.h
 stm32f070xb\comm_task.o: ..\..\..\Libraries\CMSIS\Include\core_cmFunc.h
 stm32f070xb\comm_task.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h
@@ -36,9 +36,9 @@ stm32f070xb\comm_task.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32
 stm32f070xb\comm_task.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_usart.h
 stm32f070xb\comm_task.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_wwdg.h
 stm32f070xb\comm_task.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h
-stm32f070xb\comm_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm32f070xb\comm_task.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 stm32f070xb\comm_task.o: .\LOAD\SYSTEM\delay.h
-stm32f070xb\comm_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32f070xb\comm_task.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 stm32f070xb\comm_task.o: LOAD\APP\app.h
 stm32f070xb\comm_task.o: .\LOAD\SYSTEM\serial_port.h
 stm32f070xb\comm_task.o: .\LOAD\User\device_type.h

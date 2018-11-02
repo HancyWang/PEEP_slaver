@@ -2,7 +2,7 @@ stm32f070xb\stm32f0xx_adc.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\src\s
 stm32f070xb\stm32f0xx_adc.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_adc.h
 stm32f070xb\stm32f0xx_adc.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
 stm32f070xb\stm32f0xx_adc.o: ..\..\..\Libraries\CMSIS\Include\core_cm0.h
-stm32f070xb\stm32f0xx_adc.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f070xb\stm32f0xx_adc.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32f070xb\stm32f0xx_adc.o: ..\..\..\Libraries\CMSIS\Include\core_cmInstr.h
 stm32f070xb\stm32f0xx_adc.o: ..\..\..\Libraries\CMSIS\Include\core_cmFunc.h
 stm32f070xb\stm32f0xx_adc.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h

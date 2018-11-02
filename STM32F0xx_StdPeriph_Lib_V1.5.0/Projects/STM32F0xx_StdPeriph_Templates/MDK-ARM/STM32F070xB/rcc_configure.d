@@ -3,7 +3,7 @@ stm32f070xb\rcc_configure.o: LOAD\User\rcc_configure.h
 stm32f070xb\rcc_configure.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_rcc.h
 stm32f070xb\rcc_configure.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
 stm32f070xb\rcc_configure.o: ..\..\..\Libraries\CMSIS\Include\core_cm0.h
-stm32f070xb\rcc_configure.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f070xb\rcc_configure.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32f070xb\rcc_configure.o: ..\..\..\Libraries\CMSIS\Include\core_cmInstr.h
 stm32f070xb\rcc_configure.o: ..\..\..\Libraries\CMSIS\Include\core_cmFunc.h
 stm32f070xb\rcc_configure.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h

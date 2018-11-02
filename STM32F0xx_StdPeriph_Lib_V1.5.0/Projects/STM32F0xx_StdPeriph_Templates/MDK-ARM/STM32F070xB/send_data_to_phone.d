@@ -3,7 +3,7 @@ stm32f070xb\send_data_to_phone.o: LOAD\APP\send_data_to_phone.h
 stm32f070xb\send_data_to_phone.o: .\LOAD\OS\os_core.h
 stm32f070xb\send_data_to_phone.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
 stm32f070xb\send_data_to_phone.o: ..\..\..\Libraries\CMSIS\Include\core_cm0.h
-stm32f070xb\send_data_to_phone.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f070xb\send_data_to_phone.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32f070xb\send_data_to_phone.o: ..\..\..\Libraries\CMSIS\Include\core_cmInstr.h
 stm32f070xb\send_data_to_phone.o: ..\..\..\Libraries\CMSIS\Include\core_cmFunc.h
 stm32f070xb\send_data_to_phone.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h
@@ -42,7 +42,7 @@ stm32f070xb\send_data_to_phone.o: LOAD\APP\i2c.h
 stm32f070xb\send_data_to_phone.o: LOAD\APP\common.h
 stm32f070xb\send_data_to_phone.o: LOAD\APP\comm_task.h
 stm32f070xb\send_data_to_phone.o: .\LOAD\SYSTEM\fifo\datatype.h
-stm32f070xb\send_data_to_phone.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-stm32f070xb\send_data_to_phone.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+stm32f070xb\send_data_to_phone.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32f070xb\send_data_to_phone.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 stm32f070xb\send_data_to_phone.o: LOAD\APP\SDP31_sampling_data.h
 stm32f070xb\send_data_to_phone.o: LOAD\APP\MPXV70_sampling_data.h

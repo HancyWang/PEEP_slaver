@@ -321,8 +321,8 @@ void Init_Blue_WIFI_ONOFF()  //PA8
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-	GPIO_ResetBits(GPIOA,GPIO_Pin_8);  
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_ResetBits(GPIOA,GPIO_Pin_8);  //低电平唤醒蓝牙IC
 //	GPIO_SetBits(GPIOA,GPIO_Pin_8); 
 }
 
@@ -441,7 +441,7 @@ void init_hardware()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB |RCC_AHBPeriph_GPIOC, ENABLE);//
 	//delay_ms(1);
-	//初始化LED灯                            //PB8,PB9
+	//初始化LED灯                            //PA3,PA4
 	Init_LED();
 	
 ////	//初始化USB_OE，这里是5V0_AD
@@ -450,8 +450,8 @@ void init_hardware()
 ////	//初始化USB_ON
 ////	Init_USB_ON();
 //	
-	//初始化 pwr_on_off
-	Init_PWR_ON_OFF();												//PB0
+//	//初始化 pwr_on_off
+//	Init_PWR_ON_OFF();												//PB0
 //	
 //	//初始化WIFI_RST                         //PB1
 //	Init_WIFI_RST();
@@ -485,7 +485,7 @@ void init_hardware()
 	//初始化sensor_on/off 										//PB6
 	Init_SENSOR_ONOFF();		
 
-	//初始化ADC1的数据采集
+	//初始化ADC1的数据采集  									 //PA1,采集压力
 	Init_ADC1();
 	
 //	//初始化ADC_MP  ,honneywell传感器
@@ -493,7 +493,7 @@ void init_hardware()
 
 //	SDP31_I2C_Configuration();
 		
-	//初始化ADC_Flow                         //待完成
+	//初始化ADC_Flow                         
 //	Init_ADC_Flow();
 }
 

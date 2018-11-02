@@ -35,6 +35,7 @@
 #include "comm_task.h"
 #include "iwtdg.h"
 #include "rcc_configure.h"
+#include "MPXV70_sampling_data.h"
 /**********************************
 *宏定义
 ***********************************/
@@ -146,6 +147,10 @@ extern uint8_t selfTest_end_Cnt;
 extern BOOL b_detect_hand_before_system_running;
 extern uint16_t wait_between_total_cnt;
 extern uint8_t value;
+
+extern int16_t MPXV70_zero_point;
+extern BOOL b_MPXV70_get_zero_point;
+extern MPXV70_STATE MPXV70_state;
 //extern BOOL b_start_powerOn_check;
 // BOOL b_KeyWkUP_InterrupHappened=FALSE;
 // BOOL b_usb_intterruptHappened=FALSE;
@@ -189,12 +194,11 @@ void CfgWFI()
 {
 	//时钟使能
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA|RCC_AHBPeriph_GPIOB,ENABLE);  
-	//RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);  
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);  
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2,ENABLE); 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE); 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM16,ENABLE);
 	
-	//USB充电，5V0_AD,PA0 ,这个要改，等柴工改电路图，先不配这个 
 	//外部按键,power_key,PB0
 	GPIO_InitTypeDef GPIO_InitStructure;  
 	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_IN;  
@@ -202,17 +206,15 @@ void CfgWFI()
 	GPIO_InitStructure.GPIO_PuPd=GPIO_PuPd_NOPULL;
 	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_2MHz;  
 	
-//	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_8;  //等柴工改，然后在改
+//	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_8;  
 //	GPIO_Init(GPIOA,&GPIO_InitStructure);  
 	
-	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_0;  
+	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_0;  //PB0 power_key
 	GPIO_Init(GPIOB,&GPIO_InitStructure);
 
-	//将EXTI0指向PA0  
-	//将EXTI8指向PB0
+	//将EXTI0指向PB0
 	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB,EXTI_PinSource0);   
-//	//EXTI0中断线配置
-		//EXTI8中断线配置
+
 	EXTI_InitTypeDef EXTI_InitStructure;  
 	EXTI_InitStructure.EXTI_Line=EXTI_Line0;           
 	EXTI_InitStructure.EXTI_Mode=EXTI_Mode_Interrupt;  
@@ -220,25 +222,24 @@ void CfgWFI()
 	EXTI_InitStructure.EXTI_LineCmd=ENABLE;  
 	EXTI_Init(&EXTI_InitStructure);  
 
-//	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB,EXTI_PinSource0);    //等柴工改，然后在改
+//	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB,EXTI_PinSource0);    
 //	EXTI_InitStructure.EXTI_Line=EXTI_Line0;
 //	EXTI_InitStructure.EXTI_Trigger=EXTI_Trigger_Rising_Falling;   //配置成上升沿和下降沿都可以触发中断
 //	EXTI_Init(&EXTI_InitStructure);
 
 //	//EXTI0中断向量配置  
-	//EXTI8中断向量配置  
 	NVIC_InitTypeDef NVIC_InitStructure;  
-//	NVIC_InitStructure.NVIC_IRQChannel=EXTI4_15_IRQn;    //等柴工改，然后在改
-	NVIC_InitStructure.NVIC_IRQChannelPriority=0x01;  
+////	NVIC_InitStructure.NVIC_IRQChannel=EXTI4_15_IRQn;    
+//	NVIC_InitStructure.NVIC_IRQChannelPriority=0x01;  
 	NVIC_InitStructure.NVIC_IRQChannelCmd=ENABLE;  
-	NVIC_Init(&NVIC_InitStructure);  
+//	NVIC_Init(&NVIC_InitStructure);  
 	
-	//NVIC_InitStructure.NVIC_IRQChannelPriority=0x01;
+	NVIC_InitStructure.NVIC_IRQChannelPriority=0x02;
 	NVIC_InitStructure.NVIC_IRQChannel=EXTI0_1_IRQn;
 	NVIC_Init(&NVIC_InitStructure);
 }
 
-
+#if 0
 ////PA0,判断USB是插入还是拔出
 USB_DETECT_STATE Check_USB_pull_or_push()
 {
@@ -320,6 +321,7 @@ USB_DETECT_STATE Check_USB_pull_or_push()
 		}
 	}
 }
+#endif
 
  
 //void EXTI4_15_IRQHandler()
@@ -366,23 +368,23 @@ void EXTI0_1_IRQHandler(void)
 	EXTI_ClearFlag(EXTI_Line0);
 	
 } 
-void RCC_Configuration_2(void)
-{
-	RCC_DeInit(); 
-//RCC_HSICmd(ENABLE);	//???????
-  RCC_PLLConfig(RCC_PLLSource_HSI_Div2, RCC_PLLMul_12);   //??PLL??????PLL????,?????????????,6?? ??24MHz
-  RCC_PLLCmd(ENABLE);                                    //??????PLL
-  while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY)==RESET);      //??PLL???????
-  
-  RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);             //???????,??????????????????:HSI,HSE,RCC_SYSCLKSource_PLLCLK?
- 
-  RCC_HCLKConfig(RCC_SYSCLK_Div1);                       //???AHB????,??PLL?AHB???????????AHB?????PLL?????
-  RCC_PCLKConfig(RCC_HCLK_Div1);                         //??APB????
-  RCC_ADCCLKConfig(RCC_ADCCLK_PCLK_Div4);                //ADC????,?????14MHz
-	 while(RCC_GetSYSCLKSource() != 0x08);                  //???????????, 0x00: HSI used as system clock,0x04: HSE used as system clock ,0x08: PLL used as system clock ?        
-  
-  SystemCoreClockUpdate();               
-}
+//void RCC_Configuration_2(void)
+//{
+//	RCC_DeInit(); 
+////RCC_HSICmd(ENABLE);	//???????
+//  RCC_PLLConfig(RCC_PLLSource_HSI_Div2, RCC_PLLMul_12);   //??PLL??????PLL????,?????????????,6?? ??24MHz
+//  RCC_PLLCmd(ENABLE);                                    //??????PLL
+//  while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY)==RESET);      //??PLL???????
+//  
+//  RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);             //???????,??????????????????:HSI,HSE,RCC_SYSCLKSource_PLLCLK?
+// 
+//  RCC_HCLKConfig(RCC_SYSCLK_Div1);                       //???AHB????,??PLL?AHB???????????AHB?????PLL?????
+//  RCC_PCLKConfig(RCC_HCLK_Div1);                         //??APB????
+//  RCC_ADCCLKConfig(RCC_ADCCLK_PCLK_Div4);                //ADC????,?????14MHz
+//	 while(RCC_GetSYSCLKSource() != 0x08);                  //???????????, 0x00: HSI used as system clock,0x04: HSE used as system clock ,0x08: PLL used as system clock ?        
+//  
+//  SystemCoreClockUpdate();               
+//}
 
 void init_system_afterWakeUp()
 {
@@ -392,6 +394,14 @@ void init_system_afterWakeUp()
 	delay_init();
 	os_init();
 	init_task();
+	
+	
+//	os_ticks = 0;
+//	//os_ticks = 4294967290;
+//	delay_init();
+//	os_init();
+//	SystemInit();
+//	init_task();
 }
 
 
@@ -399,102 +409,71 @@ void CfgALLPins4StopMode()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB, ENABLE);
 	
-
-	//led端口配置为输出,PB9,PB12
+	//led端口PA3,PA4
 	GPIO_InitTypeDef GPIO_InitStructure_LED;
-	GPIO_InitStructure_LED.GPIO_Pin = GPIO_Pin_9|GPIO_Pin_12;                       
+	GPIO_InitStructure_LED.GPIO_Pin = LED_GREEN_PWR_PIN|LED_YELLOW_PWR_PIN;                       
 	GPIO_InitStructure_LED.GPIO_Speed = GPIO_Speed_50MHz;     
 	GPIO_InitStructure_LED.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitStructure_LED.GPIO_OType=GPIO_OType_PP;
 	GPIO_InitStructure_LED.GPIO_PuPd=GPIO_PuPd_UP;
 	//GPIO_InitStructure_LED.GPIO_PuPd=GPIO_PuPd_NOPULL;
-	GPIO_Init(GPIOB, &GPIO_InitStructure_LED);
-	GPIO_SetBits(GPIOB, GPIO_Pin_9|GPIO_Pin_12);
+	GPIO_Init(LED_PORT, &GPIO_InitStructure_LED);
+	GPIO_SetBits(LED_PORT, LED_GREEN_PWR_PIN|LED_YELLOW_PWR_PIN);
 
-#if 0	
-////	//配置ADC1和ADC4
-////	GPIO_InitTypeDef GPIO_InitStructure_PA_1_4;
-////	GPIO_InitStructure_PA_1_4.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_4;
-////  GPIO_InitStructure_PA_1_4.GPIO_Mode = GPIO_Mode_AN;
-////  GPIO_InitStructure_PA_1_4.GPIO_PuPd = GPIO_PuPd_NOPULL ;
-////  GPIO_Init(GPIOA, &GPIO_InitStructure_PA_1_4);	
-//	
-//	
-//	//配置ADC，PA1,PB0
-//	GPIO_InitTypeDef GPIO_InitStructure_PA_1;
-//	GPIO_InitStructure_PA_1.GPIO_Pin = GPIO_Pin_1;
-//  GPIO_InitStructure_PA_1.GPIO_Mode = GPIO_Mode_AN;
-//	//GPIO_InitStructure_PA_1.GPIO_Mode = GPIO_Mode_IN;
-//  GPIO_InitStructure_PA_1.GPIO_PuPd = GPIO_PuPd_NOPULL ;
-//  GPIO_Init(GPIOA, &GPIO_InitStructure_PA_1);	
-//	
+	
+	//PA1
+	GPIO_InitTypeDef GPIO_InitStructure_PA_1;
+	GPIO_InitStructure_PA_1.GPIO_Pin = GPIO_Pin_1;
+  GPIO_InitStructure_PA_1.GPIO_Mode = GPIO_Mode_AN;
+	//GPIO_InitStructure_PA_1.GPIO_Mode = GPIO_Mode_IN;
+  GPIO_InitStructure_PA_1.GPIO_PuPd = GPIO_PuPd_NOPULL ;
+  GPIO_Init(GPIOA, &GPIO_InitStructure_PA_1);	
+	
+	//关闭ADC
+	DMA_Cmd(DMA1_Channel1, DISABLE);/* DMA1 Channel1 enable */			
+  ADC_DMACmd(ADC1, DISABLE);
+	ADC_Cmd(ADC1, DISABLE);  
+	
+	//PB0不能配置，这个是中断口
+//	//PB0
 //	GPIO_InitTypeDef GPIO_InitStructure_PB_0;
 //	GPIO_InitStructure_PB_0.GPIO_Pin = GPIO_Pin_0;
-//  //GPIO_InitStructure_PB_0.GPIO_Mode = GPIO_Mode_AN;
-//	GPIO_InitStructure_PB_0.GPIO_Mode = GPIO_Mode_IN;
+//  GPIO_InitStructure_PB_0.GPIO_Mode = GPIO_Mode_OUT;
+//	GPIO_InitStructure_PB_0.GPIO_OType=GPIO_OType_PP;
+//	//GPIO_InitStructure_PB_0.GPIO_Mode = GPIO_Mode_IN;
 //  GPIO_InitStructure_PB_0.GPIO_PuPd = GPIO_PuPd_NOPULL ;
-//  GPIO_Init(GPIOB, &GPIO_InitStructure_PB_0);
-//	
-////	GPIO_InitTypeDef GPIO_InitStructure_PB_0;
-////	GPIO_InitStructure_PB_0.GPIO_Pin = GPIO_Pin_0;
-////  //GPIO_InitStructure_PB_0.GPIO_Mode = GPIO_Mode_AN;
-////	GPIO_InitStructure_PB_0.GPIO_Mode = GPIO_Mode_OUT;
-////	GPIO_InitStructure_PB_0.GPIO_OType=GPIO_OType_PP;
-////  GPIO_InitStructure_PB_0.GPIO_PuPd = GPIO_PuPd_UP ;
-////  GPIO_Init(GPIOB, &GPIO_InitStructure_PB_0);
-////	GPIO_SetBits(GPIOB,GPIO_Pin_0);
-//	
-//	//关闭ADC
-//	DMA_Cmd(DMA1_Channel1, DISABLE);/* DMA1 Channel1 enable */			
-//  ADC_DMACmd(ADC1, DISABLE);
-//	ADC_Cmd(ADC1, DISABLE);  
-////	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, DISABLE);
-////	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1 , DISABLE);		
-////	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1 , DISABLE);
-//	
-//	//关闭串口
-//	DMA_Cmd(UART_DMA_RX_CHANNEL, DISABLE);
-//	DMA_Cmd(UART_DMA_TX_CHANNEL, DISABLE);
-//	USART_Cmd(UART, DISABLE);
-//	
-////	//串口IO,PA2,PA3
-//	GPIO_InitTypeDef GPIO_InitStructure_PA_2_3;
-//	GPIO_InitStructure_PA_2_3.GPIO_Pin = GPIO_Pin_2|GPIO_Pin_3;                       
-//	GPIO_InitStructure_PA_2_3.GPIO_Speed = GPIO_Speed_50MHz;       
-//	GPIO_InitStructure_PA_2_3.GPIO_Mode = GPIO_Mode_IN;
-//	//GPIO_InitStructure_PA_2_3.GPIO_OType=GPIO_OType_PP;
-//	//GPIO_InitStructure_PA_2_3.GPIO_PuPd=GPIO_PuPd_NOPULL;
-//	GPIO_InitStructure_PA_2_3.GPIO_PuPd=GPIO_PuPd_DOWN;
-//	GPIO_Init(GPIOA, &GPIO_InitStructure_PA_2_3);
-//	
-////	GPIO_InitTypeDef GPIO_InitStructure_PA_2_3;
-////	GPIO_InitStructure_PA_2_3.GPIO_Pin = GPIO_Pin_2|GPIO_Pin_3;                       
-////	GPIO_InitStructure_PA_2_3.GPIO_Speed = GPIO_Speed_50MHz;       
-////	GPIO_InitStructure_PA_2_3.GPIO_Mode = GPIO_Mode_AN;
-//////	GPIO_InitStructure_PA_2_3.GPIO_OType=GPIO_OType_PP;
-//////	GPIO_InitStructure_PA_2_3.GPIO_PuPd=GPIO_PuPd_UP;
-//////	//GPIO_InitStructure_PA_2_3.GPIO_PuPd=GPIO_PuPd_DOWN;
-////	GPIO_Init(GPIOA, &GPIO_InitStructure_PA_2_3);
-//	
-//	
-//	//I2C端口，PA9,PA10
-////	GPIO_InitTypeDef GPIO_InitStructure_UART;
-////	GPIO_InitStructure_UART.GPIO_Pin = GPIO_Pin_9|GPIO_Pin_10;                       
-////	GPIO_InitStructure_UART.GPIO_Speed = GPIO_Speed_50MHz;       
-////	GPIO_InitStructure_UART.GPIO_Mode = GPIO_Mode_IN;
-////	//GPIO_InitStructure_UART.GPIO_OType=GPIO_OType_PP;
-////	GPIO_InitStructure_UART.GPIO_PuPd=GPIO_PuPd_UP;
-////	GPIO_Init(GPIOA, &GPIO_InitStructure_UART);
-//	
-//	
-//	GPIO_InitTypeDef GPIO_InitStructure_UART;
-//	GPIO_InitStructure_UART.GPIO_Pin = GPIO_Pin_9|GPIO_Pin_10;                       
-//	GPIO_InitStructure_UART.GPIO_Speed = GPIO_Speed_50MHz;       
-//	GPIO_InitStructure_UART.GPIO_Mode = GPIO_Mode_OUT;
-//	GPIO_InitStructure_UART.GPIO_OType=GPIO_OType_PP;
-//	GPIO_InitStructure_UART.GPIO_PuPd=GPIO_PuPd_UP;
-//	GPIO_Init(GPIOA, &GPIO_InitStructure_UART);
-//	GPIO_SetBits(GPIOA,GPIO_Pin_9|GPIO_Pin_10); 
+//  GPIO_Init(GPIOB, &GPIO_InitStructure_PB_0);	
+//	GPIO_SetBits(GPIOB,GPIO_Pin_0);
+	
+	//PA8
+	GPIO_InitTypeDef GPIO_InitStructure_PA_8;
+	GPIO_InitStructure_PA_8.GPIO_Pin = GPIO_Pin_8;                       
+	GPIO_InitStructure_PA_8.GPIO_Speed = GPIO_Speed_50MHz;       
+	GPIO_InitStructure_PA_8.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure_PA_8.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure_PA_8.GPIO_PuPd=GPIO_PuPd_UP;
+	GPIO_Init(GPIOA, &GPIO_InitStructure_PA_8);	
+	GPIO_SetBits(GPIOA,GPIO_Pin_8);  //置为高电平，使蓝牙休眠
+	
+	
+	//串口PA9,PA10
+	GPIO_InitTypeDef GPIO_InitStructure_UART;
+	GPIO_InitStructure_UART.GPIO_Pin = UART_BLUETOOTH_RX_PIN|UART_BLUETOOTH_TX_PIN;                       
+	GPIO_InitStructure_UART.GPIO_Speed = GPIO_Speed_50MHz;       
+	GPIO_InitStructure_UART.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure_UART.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure_UART.GPIO_PuPd=GPIO_PuPd_UP;
+	GPIO_Init(UART_BLUETOOTH_IO_PORT, &GPIO_InitStructure_UART);
+	GPIO_SetBits(UART_BLUETOOTH_IO_PORT,UART_BLUETOOTH_RX_PIN|UART_BLUETOOTH_TX_PIN); 
+	//关闭串口
+	DMA_Cmd(UART_DMA_RX_CHANNEL, DISABLE);
+	DMA_Cmd(UART_DMA_TX_CHANNEL, DISABLE);
+	USART_Cmd(UART, DISABLE);
+	
+
+#if 0	
+
+
 ////	
 //	
 //	//PWR save，PA12
@@ -683,17 +662,26 @@ void CfgALLPins4StopMode()
 #endif
 }
 
+void Init_gloab_viriable()
+{
+	key_state=KEY_UPING;
+	mcu_state=POWER_OFF;
+	b_MPXV70_get_zero_point=FALSE;
+	MPXV70_zero_point=0;
+	MPXV70_state=MPXV70_SAMPLE_DATA;
+}
+
 //进入stop模式，采用中断唤醒
 void EnterStopMode()
 {
-	//Init_gloab_viriable();
+	Init_gloab_viriable();
 	
 	//配置中断
 	CfgWFI();
 	//I2C芯片ADS115进入power-down模式
 	//ADS115_enter_power_down_mode();
 
-	CfgALLPins4StopMode();   //TODO,待后期完成配置
+	CfgALLPins4StopMode();   
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);  
 	PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);
 }
@@ -732,7 +720,7 @@ void key_power_on_task(void)
 		//set_led(LED_ID_YELLOW,TRUE);
 		if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0)==0)
 		{
-			if(wakeup_Cnt==49)
+			if(wakeup_Cnt==5)
 			{
 				wakeup_Cnt=0;	
 				b_Is_PCB_PowerOn=!b_Is_PCB_PowerOn;
@@ -774,26 +762,11 @@ void key_power_on_task(void)
 		//if(b_bat_detected_ok)
 		{
 			//开机
-		//	set_led(LED_ID_GREEN,TRUE);
-		//set_led(LED_ID_YELLOW,TRUE);
-		set_led(LED_ID_GREEN,TRUE);
-//			if(mode==1)
-//			{	
-//				set_led(LED_ID_MODE1,TRUE); 
-//			}
-//			else if(mode==2)
-//			{
-//				set_led(LED_ID_MODE2,TRUE);   
-//			}
-//			else if(mode==3)
-//			{
-//				set_led(LED_ID_MODE3,TRUE);  
-//			}
-//			else
-//			{
-//				//do nothing
-//			}
-			//wakeup_Cnt=0;
+			set_led(LED_ID_GREEN,TRUE);
+//			set_led(LED_ID_YELLOW,TRUE);
+//			GPIO_ResetBits(LED_PORT,LED_GREEN_PWR_PIN);
+//			GPIO_ResetBits(LED_PORT,LED_YELLOW_PWR_PIN);
+//	
 			key_state=KEY_UPING;
 		}
 	}

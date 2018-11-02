@@ -46,6 +46,6 @@
 "stm32f070xb\os_core.o"
 "stm32f070xb\protocol_module.o"
 --library_type=microlib --strict --scatter "STM32F070xB\STM32F070xB.sct"
---diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\STM32F070xB\STM32F070xB.map" -o STM32F070xB\STM32F070xB.axf

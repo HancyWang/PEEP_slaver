@@ -10,7 +10,7 @@
 /**********************************
 *宏定义
 ***********************************/
-
+#define _DEBUG
 /***********************************
 * 全局变量
 ***********************************/
@@ -33,8 +33,8 @@ typedef enum{
 //	MS5525DSO_SAMPLING_DATA_TASK_ID,   //MS5525DSO不用了
 	MPXV70_SAMPLING_DATA_TASK_ID,
 	
-	TASK_USB_CHARGE_BAT,
-	TASK_GET_SWITCH_MODE,
+//	TASK_USB_CHARGE_BAT,
+//	TASK_GET_SWITCH_MODE,
 	//KEY_LED_TASK_ID,
 	TASK_DETECT_PALM_ID,
 	TASK_OUTPUT_PWM,

@@ -20,9 +20,9 @@
 /**********************************
 *宏定义
 ***********************************/
-#define LED_PORT GPIOB   //所有的LED灯都是GPIOB
-#define LED_GREEN_PWR_PIN  GPIO_Pin_9   //PB9 ,LED1,绿灯
-#define LED_YELLOW_PWR_PIN GPIO_Pin_8 //PB8,LED2,黄灯
+#define LED_PORT GPIOA  //所有的LED灯都是GPIOA
+#define LED_GREEN_PWR_PIN  GPIO_Pin_3   //PA4 ,LED1,绿灯
+#define LED_YELLOW_PWR_PIN GPIO_Pin_4  	//PA3,LED2,黄灯
 
 #define LED_MODE1_PIN      GPIO_Pin_6   //MODE1,PB6
 //#define LED_MODE2_PIN			 GPIO_Pin_4   //MODE2,PB4
@@ -74,9 +74,9 @@ typedef enum
 {
 	LED_ID_GREEN,
 	LED_ID_YELLOW,
-	LED_ID_MODE1,
-	LED_ID_MODE2,
-	LED_ID_MODE3
+//	LED_ID_MODE1,
+//	LED_ID_MODE2,
+//	LED_ID_MODE3
 }LED_ID;
 
 /***********************************
