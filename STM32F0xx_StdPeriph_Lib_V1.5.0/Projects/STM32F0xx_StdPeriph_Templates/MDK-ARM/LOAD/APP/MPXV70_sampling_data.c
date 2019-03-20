@@ -31,7 +31,7 @@ void MPXV70_sampling_data()
 	{
 		if(MPXV70_state==MPXV70_SAMPLE_DATA)
 		{
-			if(Is_timing_X10us(100,DELAY_MPXV70_SAMPLE_DATA))   //1ms
+			if(Is_timing_X10us(200,DELAY_MPXV70_SAMPLE_DATA))   //200代表2ms采集一次
 			{
 				if(!b_MPXV70_get_zero_point)
 				{

@@ -108,7 +108,7 @@ void SDP31_sampling_data()
 			static int32_t nData=0;
 			static int16_t result;
 		
-			if(Is_timing_X10us(200,DELAY_SDP31_READ_DATA))  //1ms采集一次
+			if(Is_timing_X10us(400,DELAY_SDP31_READ_DATA))  //4ms采集一次
 			{
 				result=SDP31_read_data();
 				if(result>=0)

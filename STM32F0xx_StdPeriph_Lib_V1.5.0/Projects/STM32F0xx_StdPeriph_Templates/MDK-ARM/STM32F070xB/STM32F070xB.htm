@@ -3,7 +3,7 @@
 <title>Static Call Graph - [STM32F070xB\STM32F070xB.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM32F070xB\STM32F070xB.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Nov 02 20:34:25 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Nov 08 10:48:50 2018
 <BR><P>
 <H3>Maximum Stack Usage =        184 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -364,8 +364,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_ADC1
 </UL>
 
-<P><STRONG><a name="[3e]"></a>CfgALLPins4StopMode</STRONG> (Thumb, 228 bytes, Stack size 40 bytes, key_power_on_task.o(i.CfgALLPins4StopMode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = CfgALLPins4StopMode &rArr; GPIO_Init
+<P><STRONG><a name="[3e]"></a>CfgALLPins4StopMode</STRONG> (Thumb, 386 bytes, Stack size 88 bytes, key_power_on_task.o(i.CfgALLPins4StopMode))
+<BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = CfgALLPins4StopMode &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_DMACmd
 <LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Cmd
@@ -442,7 +442,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[50]"></a>EnterStopMode</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, key_power_on_task.o(i.EnterStopMode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = EnterStopMode &rArr; CfgALLPins4StopMode &rArr; GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = EnterStopMode &rArr; CfgALLPins4StopMode &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWR_EnterSTOPMode
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
@@ -450,7 +450,8 @@ Global Symbols
 <LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CfgWFI
 <LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CfgALLPins4StopMode
 </UL>
-<BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;key_power_on_task
+<BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;key_power_on_task
 </UL>
 
 <P><STRONG><a name="[40]"></a>GPIO_Init</STRONG> (Thumb, 144 bytes, Stack size 20 bytes, stm32f0xx_gpio.o(i.GPIO_Init))
@@ -589,8 +590,7 @@ Global Symbols
 <P><STRONG><a name="[5c]"></a>Init_ADC1</STRONG> (Thumb, 224 bytes, Stack size 80 bytes, hardware.o(i.Init_ADC1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = Init_ADC1 &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_StartOfConversion
-<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
+<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetFlagStatus
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetCalibrationFactor
 <LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_DeInit
@@ -605,6 +605,7 @@ Global Symbols
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
 <LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_StructInit
+<LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_StartOfConversion
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_hardware
 </UL>
@@ -673,7 +674,7 @@ Global Symbols
 <LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPXV70_sampling_data
 </UL>
 
-<P><STRONG><a name="[27]"></a>MPXV70_sampling_data</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, mpxv70_sampling_data.o(i.MPXV70_sampling_data))
+<P><STRONG><a name="[27]"></a>MPXV70_sampling_data</STRONG> (Thumb, 140 bytes, Stack size 8 bytes, mpxv70_sampling_data.o(i.MPXV70_sampling_data))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = MPXV70_sampling_data &rArr; __aeabi_idivmod &rArr; __aeabi_uidivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Is_timing_X10us
@@ -747,8 +748,8 @@ Global Symbols
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_ADCCLKConfig
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
 </UL>
-<BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_system_afterWakeUp
+<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_system_afterWakeUp
+<LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[73]"></a>RCC_DeInit</STRONG> (Thumb, 102 bytes, Stack size 0 bytes, stm32f0xx_rcc.o(i.RCC_DeInit))
@@ -827,7 +828,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDP31_sampling_data
 </UL>
 
-<P><STRONG><a name="[26]"></a>SDP31_sampling_data</STRONG> (Thumb, 400 bytes, Stack size 56 bytes, sdp31_sampling_data.o(i.SDP31_sampling_data))
+<P><STRONG><a name="[26]"></a>SDP31_sampling_data</STRONG> (Thumb, 414 bytes, Stack size 56 bytes, sdp31_sampling_data.o(i.SDP31_sampling_data))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = SDP31_sampling_data &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Is_timing_X10us
@@ -991,8 +992,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_CLKSourceConfig
 <LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_system_afterWakeUp
+<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_system_afterWakeUp
+<LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[4d]"></a>delay_us</STRONG> (Thumb, 74 bytes, Stack size 0 bytes, delay.o(i.delay_us))
@@ -1029,7 +1030,8 @@ Global Symbols
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_Configuration
 </UL>
-<BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;key_power_on_task
+<BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;key_power_on_task
 </UL>
 
 <P><STRONG><a name="[29]"></a>init_task</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, app.o(i.init_task))
@@ -1060,22 +1062,24 @@ Global Symbols
 <P><STRONG><a name="[25]"></a>key_power_on_task</STRONG> (Thumb, 188 bytes, Stack size 8 bytes, key_power_on_task.o(i.key_power_on_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 180<LI>Call Chain = key_power_on_task &rArr; init_system_afterWakeUp &rArr; init_task &rArr; init_hardware &rArr; Init_UART_BLUETOOTH &rArr; USART_Init &rArr; RCC_GetClocksFreq &rArr; __aeabi_uidivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
+<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_system_afterWakeUp
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EnterStopMode
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_led
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;os_delay_10us
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_system_afterWakeUp
-<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EnterStopMode
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> app.o(i.init_task)
 </UL>
-<P><STRONG><a name="[22]"></a>main</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = main &rArr; os_init &rArr; init_tim &rArr; __aeabi_uidivmod
+<P><STRONG><a name="[22]"></a>main</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 180<LI>Call Chain = main &rArr; init_system_afterWakeUp &rArr; init_task &rArr; init_hardware &rArr; Init_UART_BLUETOOTH &rArr; USART_Init &rArr; RCC_GetClocksFreq &rArr; __aeabi_uidivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;os_start
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;os_init
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;os_create_task
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_system_afterWakeUp
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_Configuration
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EnterStopMode
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
@@ -1102,8 +1106,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_tim
 </UL>
-<BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_system_afterWakeUp
+<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_system_afterWakeUp
+<LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[86]"></a>os_isr_ticks</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, os_core.o(i.os_isr_ticks))
@@ -1120,7 +1124,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[28]"></a>send_data_to_phone_task</STRONG> (Thumb, 142 bytes, Stack size 8 bytes, send_data_to_phone.o(i.send_data_to_phone_task))
+<P><STRONG><a name="[28]"></a>send_data_to_phone_task</STRONG> (Thumb, 150 bytes, Stack size 8 bytes, send_data_to_phone.o(i.send_data_to_phone_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = send_data_to_phone_task &rArr; os_delay_10us &rArr; __aeabi_uidivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_SendData

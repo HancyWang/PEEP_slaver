@@ -470,6 +470,64 @@ void CfgALLPins4StopMode()
 	DMA_Cmd(UART_DMA_TX_CHANNEL, DISABLE);
 	USART_Cmd(UART, DISABLE);
 	
+	//PB3,PB4
+	GPIO_InitTypeDef GPIO_InitStructure_PB_3_4;
+	GPIO_InitStructure_PA_8.GPIO_Pin = GPIO_Pin_3|GPIO_Pin_4;                       
+	GPIO_InitStructure_PA_8.GPIO_Speed = GPIO_Speed_50MHz;       
+	GPIO_InitStructure_PA_8.GPIO_Mode = GPIO_Mode_IN;
+//	GPIO_InitStructure_PA_8.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure_PA_8.GPIO_PuPd=GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOB, &GPIO_InitStructure_PB_3_4);	
+	
+	//PB5
+	GPIO_InitTypeDef GPIO_InitStructure_PB_5;
+	GPIO_InitStructure_PB_5.GPIO_Pin = GPIO_Pin_5;                       
+	GPIO_InitStructure_PB_5.GPIO_Speed = GPIO_Speed_50MHz;       
+	GPIO_InitStructure_PB_5.GPIO_Mode = GPIO_Mode_IN;
+//	GPIO_InitStructure_PB_5.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure_PB_5.GPIO_PuPd=GPIO_PuPd_UP;
+	GPIO_Init(GPIOB, &GPIO_InitStructure_PB_5);
+	
+	//PB6
+	GPIO_InitTypeDef GPIO_InitStructure_PB_6;
+	GPIO_InitStructure_PB_6.GPIO_Pin = GPIO_Pin_6;                       
+	GPIO_InitStructure_PB_6.GPIO_Speed = GPIO_Speed_50MHz;       
+	GPIO_InitStructure_PB_6.GPIO_Mode = GPIO_Mode_IN;
+//	GPIO_InitStructure_PB_6.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure_PB_6.GPIO_PuPd=GPIO_PuPd_UP;
+	GPIO_Init(GPIOB, &GPIO_InitStructure_PB_6);
+//	GPIO_InitStructure_PB_6.GPIO_Mode = GPIO_Mode_OUT;
+//	GPIO_InitStructure_PB_6.GPIO_OType=GPIO_OType_PP;
+//	GPIO_InitStructure_PB_6.GPIO_PuPd=GPIO_PuPd_UP;
+//	GPIO_Init(GPIOB, &GPIO_InitStructure_PB_6);
+//	GPIO_SetBits(GPIOB,GPIO_Pin_6);
+
+	//PA0,PA2,PA5,PA6,PA7,PA11,PA12,PA15
+	GPIO_InitTypeDef GPIO_InitStructure_PA_0_2_5_6_7_11_12_15;
+	GPIO_InitStructure_PA_0_2_5_6_7_11_12_15.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_2|GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_15;                       
+	GPIO_InitStructure_PA_0_2_5_6_7_11_12_15.GPIO_Speed = GPIO_Speed_50MHz;       
+	GPIO_InitStructure_PA_0_2_5_6_7_11_12_15.GPIO_Mode = GPIO_Mode_IN;
+//	GPIO_InitStructure_PA_0_2_5_6_7_11_12_15.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure_PA_0_2_5_6_7_11_12_15.GPIO_PuPd=GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOA, &GPIO_InitStructure_PA_0_2_5_6_7_11_12_15);
+	
+	//PB1,PB7,PB8,PB9,PB10,PB11,PB12,PB13,PB14,PB15
+	GPIO_InitTypeDef GPIO_InitStructure_PB_1_7_8_9_10_11_12_13_14_15;
+	GPIO_InitStructure_PB_1_7_8_9_10_11_12_13_14_15.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;                       
+	GPIO_InitStructure_PB_1_7_8_9_10_11_12_13_14_15.GPIO_Speed = GPIO_Speed_50MHz;       
+	GPIO_InitStructure_PB_1_7_8_9_10_11_12_13_14_15.GPIO_Mode = GPIO_Mode_IN;
+//	GPIO_InitStructure_PB_1_7_8_9_10_11_12_13_14_15.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure_PB_1_7_8_9_10_11_12_13_14_15.GPIO_PuPd=GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOB, &GPIO_InitStructure_PB_1_7_8_9_10_11_12_13_14_15);
+	
+	//PC13,14,15
+	GPIO_InitTypeDef GPIO_InitStructure_PC_13_14_15;
+	GPIO_InitStructure_PC_13_14_15.GPIO_Pin = GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;                       
+	GPIO_InitStructure_PC_13_14_15.GPIO_Speed = GPIO_Speed_50MHz;       
+	GPIO_InitStructure_PC_13_14_15.GPIO_Mode = GPIO_Mode_IN;
+//	GPIO_InitStructure_PC_13_14_15.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure_PC_13_14_15.GPIO_PuPd=GPIO_PuPd_DOWN;
+	GPIO_Init(GPIOC, &GPIO_InitStructure_PC_13_14_15);
 
 #if 0	
 
