@@ -63,7 +63,6 @@
 #define UART_BLUETOOTH_TX_AF_PIN_SOURCE 			GPIO_PinSource9
 
 
-
 #define UART_BAUDRATE   256000 
 
 #define DMA_CLKSRC RCC_AHBPeriph_DMA1

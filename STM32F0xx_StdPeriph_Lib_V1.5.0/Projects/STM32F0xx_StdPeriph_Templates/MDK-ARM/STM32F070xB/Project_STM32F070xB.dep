@@ -76,7 +76,7 @@ I (.\LOAD\OS\os_cfg.h)(0x5BC6F2C7)
 I (.\LOAD\OS\os_core.h)(0x5BC6F2C7)
 I (.\LOAD\HARDWARE\hardware.h)(0x5BDABBC0)
 I (.\LOAD\SYSTEM\fifo\datatype.h)(0x5BC6F2C7)
-I (.\LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (.\LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (.\LOAD\User\device_type.h)(0x5BC6F2C7)
 I (.\LOAD\APP\app.h)(0x5BDC529F)
 I (.\LOAD\APP\comm_task.h)(0x5BC6F2C7)
@@ -931,7 +931,7 @@ I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_usart.h)(0x5BC6F2
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_wwdg.h)(0x5BC6F2C7)
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h)(0x5BC6F2C7)
 F (.\LOAD\SYSTEM\serial_port.c)(0x5C99D787)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\ -I ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include -I ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc -I ..\..\..\Libraries\STM32F0xx_CPAL_Driver\inc -I ..\..\..\Libraries\CMSIS\Include -I .\LOAD\SYSTEM -I .\LOAD\HARDWARE -I .\LOAD\APP -I .\LOAD\OS -I .\LOAD\MODULE -I .\LOAD\CORE -I .\LOAD\SYSTEM\cmd -I .\LOAD\SYSTEM\fifo -I .\LOAD\User -I ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include --c99-I.\RTE\_STM32F070xB-ID:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-ID:\Keil_v5\ARM\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Device\Include-D__UVISION_VERSION="525" -DSTM32F070xB -DUSE_STDPERIPH_DRIVER -DSTM32F070xB -DUSE_DEFAULT_TIMEOUT_CALLBACK-o stm32f070xb\serial_port.o --omf_browse stm32f070xb\serial_port.crf --depend stm32f070xb\serial_port.d)
-I (LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h)(0x5BC6F2C6)
 I (..\..\..\Libraries\CMSIS\Include\core_cm0.h)(0x5BC6F2C7)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -968,7 +968,7 @@ I (.\LOAD\SYSTEM\fifo\datatype.h)(0x5BC6F2C7)
 F (.\LOAD\SYSTEM\cmd\CMD_Receive.c)(0x5BC6F2C7)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\ -I ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include -I ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc -I ..\..\..\Libraries\STM32F0xx_CPAL_Driver\inc -I ..\..\..\Libraries\CMSIS\Include -I .\LOAD\SYSTEM -I .\LOAD\HARDWARE -I .\LOAD\APP -I .\LOAD\OS -I .\LOAD\MODULE -I .\LOAD\CORE -I .\LOAD\SYSTEM\cmd -I .\LOAD\SYSTEM\fifo -I .\LOAD\User -I ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include --c99-I.\RTE\_STM32F070xB-ID:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-ID:\Keil_v5\ARM\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Device\Include-D__UVISION_VERSION="525" -DSTM32F070xB -DUSE_STDPERIPH_DRIVER -DSTM32F070xB -DUSE_DEFAULT_TIMEOUT_CALLBACK-o stm32f070xb\cmd_receive.o --omf_browse stm32f070xb\cmd_receive.crf --depend stm32f070xb\cmd_receive.d)
 I (LOAD\SYSTEM\cmd\CMD_receive.h)(0x5BC6F2C7)
 I (.\LOAD\SYSTEM\fifo\DataType.h)(0x5BC6F2C7)
-I (.\LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (.\LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h)(0x5BC6F2C6)
 I (..\..\..\Libraries\CMSIS\Include\core_cm0.h)(0x5BC6F2C7)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -1037,7 +1037,7 @@ I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_usart.h)(0x5BC6F2
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_wwdg.h)(0x5BC6F2C7)
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h)(0x5BC6F2C7)
 I (.\LOAD\HARDWARE\hardware.h)(0x5BDABBC0)
-I (.\LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (.\LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (.\LOAD\User\device_type.h)(0x5BC6F2C7)
 F (.\LOAD\HARDWARE\hardware.c)(0x5BE3A410)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\ -I ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include -I ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc -I ..\..\..\Libraries\STM32F0xx_CPAL_Driver\inc -I ..\..\..\Libraries\CMSIS\Include -I .\LOAD\SYSTEM -I .\LOAD\HARDWARE -I .\LOAD\APP -I .\LOAD\OS -I .\LOAD\MODULE -I .\LOAD\CORE -I .\LOAD\SYSTEM\cmd -I .\LOAD\SYSTEM\fifo -I .\LOAD\User -I ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include --c99-I.\RTE\_STM32F070xB-ID:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-ID:\Keil_v5\ARM\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Device\Include-D__UVISION_VERSION="525" -DSTM32F070xB -DUSE_STDPERIPH_DRIVER -DSTM32F070xB -DUSE_DEFAULT_TIMEOUT_CALLBACK-o stm32f070xb\hardware.o --omf_browse stm32f070xb\hardware.crf --depend stm32f070xb\hardware.d)
 I (LOAD\HARDWARE\hardware.h)(0x5BDABBC0)
@@ -1072,7 +1072,7 @@ I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_tim.h)(0x5BC6F2C7
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_usart.h)(0x5BC6F2C7)
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_wwdg.h)(0x5BC6F2C7)
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h)(0x5BC6F2C7)
-I (.\LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (.\LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (.\LOAD\User\device_type.h)(0x5BC6F2C7)
 I (.\LOAD\SYSTEM\delay.h)(0x5BC6F2C7)
 I (.\LOAD\OS\os_cfg.h)(0x5BC6F2C7)
@@ -1159,7 +1159,7 @@ I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h)(0x5BC6F2C
 I (.\LOAD\SYSTEM\fifo\datatype.h)(0x5BC6F2C7)
 I (LOAD\APP\comm_task.h)(0x5BC6F2C7)
 I (.\LOAD\SYSTEM\cmd\CMD_Receive.h)(0x5BC6F2C7)
-I (.\LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (.\LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (.\LOAD\User\device_type.h)(0x5BC6F2C7)
 I (.\LOAD\HARDWARE\hardware.h)(0x5BDABBC0)
 I (.\LOAD\HARDWARE\Motor_pwm.h)(0x5BC6F2C7)
@@ -1213,7 +1213,7 @@ I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (.\LOAD\SYSTEM\delay.h)(0x5BC6F2C7)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (LOAD\APP\app.h)(0x5BDC529F)
-I (.\LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (.\LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (.\LOAD\User\device_type.h)(0x5BC6F2C7)
 I (.\LOAD\MODULE\protocol_module.h)(0x5BC6F2C7)
 I (LOAD\APP\key_power_on_task.h)(0x5BC6F2C7)
@@ -1325,7 +1325,7 @@ I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_wwdg.h)(0x5BC6F2C
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h)(0x5BC6F2C7)
 I (.\LOAD\SYSTEM\fifo\datatype.h)(0x5BC6F2C7)
 I (.\LOAD\HARDWARE\hardware.h)(0x5BDABBC0)
-I (.\LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (.\LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (.\LOAD\User\device_type.h)(0x5BC6F2C7)
 I (.\LOAD\SYSTEM\fifo\fifo.h)(0x5BC6F2C7)
 I (LOAD\APP\key_power_on_task.h)(0x5BC6F2C7)
@@ -1374,7 +1374,7 @@ I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_wwdg.h)(0x5BC6F2C
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h)(0x5BC6F2C7)
 I (LOAD\APP\app.h)(0x5BDC529F)
 I (.\LOAD\OS\os_cfg.h)(0x5BC6F2C7)
-I (.\LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (.\LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (.\LOAD\User\device_type.h)(0x5BC6F2C7)
 I (LOAD\APP\key_power_on_task.h)(0x5BC6F2C7)
 I (.\LOAD\SYSTEM\delay.h)(0x5BC6F2C7)
@@ -1501,7 +1501,7 @@ I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h)(0x5BC6F2C
 I (LOAD\OS\os_cfg.h)(0x5BC6F2C7)
 I (.\LOAD\HARDWARE\hardware.h)(0x5BDABBC0)
 I (.\LOAD\SYSTEM\fifo\datatype.h)(0x5BC6F2C7)
-I (.\LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (.\LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (.\LOAD\User\device_type.h)(0x5BC6F2C7)
 F (.\LOAD\MODULE\protocol_module.c)(0x5BC6F2C7)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\ -I ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include -I ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc -I ..\..\..\Libraries\STM32F0xx_CPAL_Driver\inc -I ..\..\..\Libraries\CMSIS\Include -I .\LOAD\SYSTEM -I .\LOAD\HARDWARE -I .\LOAD\APP -I .\LOAD\OS -I .\LOAD\MODULE -I .\LOAD\CORE -I .\LOAD\SYSTEM\cmd -I .\LOAD\SYSTEM\fifo -I .\LOAD\User -I ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include --c99-I.\RTE\_STM32F070xB-ID:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-ID:\Keil_v5\ARM\CMSIS\Include-ID:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\2.0.0\Device\Include-D__UVISION_VERSION="525" -DSTM32F070xB -DUSE_STDPERIPH_DRIVER -DSTM32F070xB -DUSE_DEFAULT_TIMEOUT_CALLBACK-o stm32f070xb\protocol_module.o --omf_browse stm32f070xb\protocol_module.crf --depend stm32f070xb\protocol_module.d)
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_usart.h)(0x5BC6F2C7)
@@ -1535,7 +1535,7 @@ I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_tim.h)(0x5BC6F2C7
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_wwdg.h)(0x5BC6F2C7)
 I (..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_misc.h)(0x5BC6F2C7)
 I (.\LOAD\SYSTEM\fifo\datatype.h)(0x5BC6F2C7)
-I (.\LOAD\SYSTEM\serial_port.h)(0x5BDA977B)
+I (.\LOAD\SYSTEM\serial_port.h)(0x5FFE9069)
 I (.\LOAD\User\device_type.h)(0x5BC6F2C7)
 I (.\LOAD\HARDWARE\hardware.h)(0x5BDABBC0)
 I (.\LOAD\SYSTEM\fifo\fifo.h)(0x5BC6F2C7)
