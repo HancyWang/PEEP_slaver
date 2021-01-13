@@ -3,7 +3,7 @@ stm32f070xb\hardware.o: LOAD\HARDWARE\hardware.h
 stm32f070xb\hardware.o: .\LOAD\SYSTEM\fifo\datatype.h
 stm32f070xb\hardware.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
 stm32f070xb\hardware.o: ..\..\..\Libraries\CMSIS\Include\core_cm0.h
-stm32f070xb\hardware.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f070xb\hardware.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32f070xb\hardware.o: ..\..\..\Libraries\CMSIS\Include\core_cmInstr.h
 stm32f070xb\hardware.o: ..\..\..\Libraries\CMSIS\Include\core_cmFunc.h
 stm32f070xb\hardware.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h
@@ -37,7 +37,7 @@ stm32f070xb\hardware.o: .\LOAD\User\device_type.h
 stm32f070xb\hardware.o: .\LOAD\SYSTEM\delay.h
 stm32f070xb\hardware.o: .\LOAD\OS\os_cfg.h
 stm32f070xb\hardware.o: .\LOAD\OS\os_core.h
-stm32f070xb\hardware.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+stm32f070xb\hardware.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
 stm32f070xb\hardware.o: .\LOAD\APP\i2c.h
 stm32f070xb\hardware.o: .\LOAD\APP\common.h
 stm32f070xb\hardware.o: .\LOAD\APP\comm_task.h

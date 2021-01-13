@@ -2,7 +2,7 @@ stm32f070xb\protocol_module.o: LOAD\MODULE\protocol_module.c
 stm32f070xb\protocol_module.o: ..\..\..\Libraries\STM32F0xx_StdPeriph_Driver\inc\stm32f0xx_usart.h
 stm32f070xb\protocol_module.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
 stm32f070xb\protocol_module.o: ..\..\..\Libraries\CMSIS\Include\core_cm0.h
-stm32f070xb\protocol_module.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f070xb\protocol_module.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32f070xb\protocol_module.o: ..\..\..\Libraries\CMSIS\Include\core_cmInstr.h
 stm32f070xb\protocol_module.o: ..\..\..\Libraries\CMSIS\Include\core_cmFunc.h
 stm32f070xb\protocol_module.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h
@@ -41,8 +41,8 @@ stm32f070xb\protocol_module.o: .\LOAD\APP\comm_task.h
 stm32f070xb\protocol_module.o: .\LOAD\OS\os_core.h
 stm32f070xb\protocol_module.o: .\LOAD\APP\app.h
 stm32f070xb\protocol_module.o: .\LOAD\OS\os_cfg.h
-stm32f070xb\protocol_module.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-stm32f070xb\protocol_module.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32f070xb\protocol_module.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32f070xb\protocol_module.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 stm32f070xb\protocol_module.o: .\LOAD\APP\key_power_on_task.h
 stm32f070xb\protocol_module.o: .\LOAD\APP\common.h
 stm32f070xb\protocol_module.o: .\LOAD\APP\i2c.h

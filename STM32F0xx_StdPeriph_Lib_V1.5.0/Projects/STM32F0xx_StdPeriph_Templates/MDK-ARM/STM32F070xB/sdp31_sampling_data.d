@@ -5,7 +5,7 @@ stm32f070xb\sdp31_sampling_data.o: .\LOAD\OS\os_cfg.h
 stm32f070xb\sdp31_sampling_data.o: .\LOAD\OS\os_core.h
 stm32f070xb\sdp31_sampling_data.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h
 stm32f070xb\sdp31_sampling_data.o: ..\..\..\Libraries\CMSIS\Include\core_cm0.h
-stm32f070xb\sdp31_sampling_data.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f070xb\sdp31_sampling_data.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32f070xb\sdp31_sampling_data.o: ..\..\..\Libraries\CMSIS\Include\core_cmInstr.h
 stm32f070xb\sdp31_sampling_data.o: ..\..\..\Libraries\CMSIS\Include\core_cmFunc.h
 stm32f070xb\sdp31_sampling_data.o: ..\..\..\Libraries\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h
@@ -40,4 +40,4 @@ stm32f070xb\sdp31_sampling_data.o: .\LOAD\SYSTEM\delay.h
 stm32f070xb\sdp31_sampling_data.o: .\LOAD\SYSTEM\fifo\datatype.h
 stm32f070xb\sdp31_sampling_data.o: LOAD\APP\comm_task.h
 stm32f070xb\sdp31_sampling_data.o: LOAD\APP\key_power_on_task.h
-stm32f070xb\sdp31_sampling_data.o: D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+stm32f070xb\sdp31_sampling_data.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
